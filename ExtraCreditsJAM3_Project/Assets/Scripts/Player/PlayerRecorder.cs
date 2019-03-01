@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerRecorder : MonoBehaviour
 {
     public bool isRecording;
-    public float recordTime;
+    [SerializeField] private float recordTime;
 
     public List<MovementRecord> playerMovementRecords = new List<MovementRecord>();
     public List<ShootingRecord> playerShootingRecords = new List<ShootingRecord>();
@@ -14,17 +14,14 @@ public class PlayerRecorder : MonoBehaviour
     void Start()
     {
 
+        BeginRound();
+    }
+
+
+    public void BeginRound()
+    {
         StartCoroutine(RecordGameplay());
     }
-
-    // Update is called once per frame
-    /*
-    void Update()
-    {
-        
-    }
-    */
-
     public void AddMovementRecord()
     {
         playerMovementRecords.Add(new MovementRecord(transform.position, transform.forward));
@@ -44,5 +41,18 @@ public class PlayerRecorder : MonoBehaviour
             AddMovementRecord();
             yield return new WaitForSeconds(recordTime);
         }
+        
+        
+    }
+
+    public void RecordRound()
+    {
+        GameManager.instance.StoreRecordRound(playerMovementRecords,playerShootingRecords);
+    }
+
+    public void ResetRecord()
+    {
+        playerMovementRecords.Clear();
+        playerShootingRecords.Clear();
     }
 }

@@ -8,8 +8,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [HideInInspector] public float roundStartTime;
-    [HideInInspector] public PlayerMovement player;
-    
+
+    [HideInInspector] public
+        PlayerMovement playerMov;
+
+    [HideInInspector] public
+        PlayerRecorder playerRec;
+
+    private List<RoundRecordContainer> roundPlayerRecords;
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,11 +34,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckForFinish();
     }
 
     public void StartRound(float _time)
     {
         roundStartTime = _time;
     }
+
+    public void StoreRecordRound(List<MovementRecord> _movements, List<ShootingRecord> _shootings)
+    {
+        roundPlayerRecords.Add(new RoundRecordContainer(_movements,_shootings));
+    }
+
+    private void CheckForFinish()
+    {
+        
+    }
+
+    public void FinishRound(bool _win)
+    {
+        if (_win)
+        {
+            playerRec.isRecording = false;
+            playerRec.RecordRound();
+            playerRec.ResetRecord();
+
+        }
+        else
+        {
+            playerRec.isRecording = false;
+        }
+    }
+    
 }

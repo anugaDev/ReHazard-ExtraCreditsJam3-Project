@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour
         ;
 
     [SerializeField] private Rigidbody2D playerRb;
-    
-    public Vector2 m_LookingVector, m_abilityVelocity;
+
+    public Vector2 m_LookingVector;
 
     [SerializeField] private float
         defaultSpeed;
@@ -25,16 +25,14 @@ public class PlayerMovement : MonoBehaviour
         ;
       
         
-    // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         actualSpeed = defaultSpeed;
-        GameManager.instance.player = this;
+        GameManager.instance.playerMov = this;
         
     }
 
-    // Update is called once per frame
     void Update()
     {
       
@@ -70,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
         movement *= actualSpeed * Time.fixedDeltaTime;
 
-        print(movement);
+//        print(movement);
 
 
 

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerRotate : MonoBehaviour
 {
     [SerializeField] private Camera gameCamera;
-    [SerializeField] private Vector2 lookingVector;
+    public Vector2 lookingVector;
     
     // Start is called before the first frame update
     void Start()
