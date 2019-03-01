@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [HideInInspector] public float roundStartTime;
-    [HideInInspector] public PlayerMovement player
+    [HideInInspector] public PlayerMovement player;
     
     // Start is called before the first frame update
     void Awake()

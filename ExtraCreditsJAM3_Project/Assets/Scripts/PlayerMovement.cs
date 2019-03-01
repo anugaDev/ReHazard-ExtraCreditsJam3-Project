@@ -6,67 +6,74 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private KeyCode
-        m_UpKey = KeyCode.W,
-        m_DownKey = KeyCode.S,
-        m_LeftKey = KeyCode.A,
-        m_RightKey = KeyCode.D
+        upKey = KeyCode.W,
+        downKey = KeyCode.S,
+        leftKey = KeyCode.A,
+        rightKey = KeyCode.D
         
         ;
+
+    [SerializeField] private Rigidbody2D playerRb;
+    
     public Vector2 m_LookingVector, m_abilityVelocity;
 
     [SerializeField] private float
-        m_defaultSpeed;
+        defaultSpeed;
     
     [HideInInspector] public float 
-        m_actualSpeed
+        actualSpeed
         ;
       
         
     // Start is called before the first frame update
     void Start()
     {
+        playerRb = GetComponent<Rigidbody2D>();
+        actualSpeed = defaultSpeed;
+        GameManager.instance.player = this;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameManager.m_instance.m_Player = this;
-        m_actualSpeed = m_defaultSpeed;
+      
+        UpdateMovement();
     }
     void UpdateMovement()
     {
-        //float l_Vertical = Mathf.Round( Input.GetAxis("Horizontal"));
-        //float l_Horizontal = Mathf.Round ( Input.GetAxis("Vertical"));
+    
 
-        Vector2 l_Movement = new Vector2();
+        var movement = Vector2.zero;
 
-        if (Input.GetKey(m_UpKey))
+        if (Input.GetKey(upKey))
         {
-            l_Movement.y += 1;
+            movement.y += 1;
         }
-        if (Input.GetKey(m_DownKey))
+        if (Input.GetKey(downKey))
         {
-            l_Movement.y -= 1;
+            movement.y -= 1;
 
         }
-        if (Input.GetKey(m_RightKey))
+        if (Input.GetKey(rightKey))
         {
-            l_Movement.x += 1;
+            movement.x += 1;
         }
-        if (Input.GetKey(m_LeftKey))
+        if (Input.GetKey(leftKey))
         {
-            l_Movement.x -= 1;
+            movement.x -= 1;
         }
 
        
 
       
 
-        l_Movement *= m_actualSpeed * Time.deltaTime;
+        movement *= actualSpeed * Time.fixedDeltaTime;
+
+        print(movement);
 
 
 
-        m_PlayerRb.velocity = l_Movement;
+        playerRb.velocity = movement;
     }
 }
