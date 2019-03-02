@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
 
     public void StartRound()
     {
-        levelShadowcreator.ResetShadows();
         levelShadowcreator.SetPlayerRecords(roundPlayerRecords);
         levelShadowcreator.CreateShadows();
         playerMov.ResetToSpawn();
@@ -65,7 +64,7 @@ public class GameManager : MonoBehaviour
     private void CheckForFinish()
     
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && levelShadowcreator.levelShadows.Count <= 0)
         {
             FinishRound(true);
         }
@@ -74,19 +73,23 @@ public class GameManager : MonoBehaviour
 
     public void FinishRound(bool _win)
     {
+        levelShadowcreator.ResetShadows();
+
+        
         if (_win)
         {
             playerRec.isRecording = false;
             playerRec.RecordRound();
 
 
-            StartRound();
+           
 
         }
         else
         {
             playerRec.isRecording = false;
-            StartRound();
+            levelShadowcreator.ErasePlayerRecords();
+           
         }
 
         foreach (var bullet in gameBullets)
@@ -94,7 +97,10 @@ public class GameManager : MonoBehaviour
             Destroy(bullet);
                 
         }
-        gameBullets.Clear();
+        gameBullets = new List<BulletBehaviour>();
+        
+        
+        StartRound();
     }
 
     public void RemoveShadowAt(ShadowBehaviour _shadow)

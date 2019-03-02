@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 3856128535933555572}
   - component: {fileID: 2313374445546004304}
   - component: {fileID: 239933496890413971}
-  - component: {fileID: 8483794938838088116}
   - component: {fileID: 2024053052102802396}
+  - component: {fileID: 8483794938838088116}
   m_Layer: 0
   m_Name: PlayerShadowLoop
-  m_TagString: Untagged
+  m_TagString: PlayerShadow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2b5b55a194edf6f43b956843d82d619c, type: 3}
-  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_Color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,29 +106,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &8483794938838088116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405248047514709945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3b317b3043d54d478edb2588a9aa7d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 199759765, guid: a215bd36fdd428042b23ac818eabcb66, type: 3}
-  shadowSpeed: 200
-  shadowRotSpeed: 20
-  inPositionRadius: 0.05
-  startMovingTime: 0
-  startingWaitTime: 0
-  loopPauseTime: 1
-  bulletSpeed: 200
-  timeBetweenChangingPositions: 0
 --- !u!50 &2024053052102802396
 Rigidbody2D:
   serializedVersion: 4
@@ -148,5 +127,27 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &8483794938838088116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405248047514709945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b317b3043d54d478edb2588a9aa7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 199759765, guid: a215bd36fdd428042b23ac818eabcb66, type: 3}
+  shadowSpeed: 200
+  shadowRotSpeed: 20
+  inPositionRadius: 0.05
+  startMovingTime: 0
+  startingWaitTime: 0
+  loopPauseTime: 1
+  bulletSpeed: 500
+  bulletOffset: 1
+  timeBetweenChangingPositions: 0

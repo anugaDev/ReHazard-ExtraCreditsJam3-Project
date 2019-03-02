@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRb;
 
     public Vector3 spawnPosition;
-   
+    
+    [SerializeField] private Transform legs;
 
     [SerializeField] private float
         defaultSpeed;
@@ -24,7 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public float 
         actualSpeed
         ;
-      
+
+    private Vector2 direction;
         
     void Start()
     {
@@ -37,9 +39,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
       
-        UpdateMovement();
+        Updatedirection();
+
+        UpdateLegs();
     }
-    void UpdateMovement()
+    void Updatedirection()
     {
     
 
@@ -63,8 +67,9 @@ public class PlayerMovement : MonoBehaviour
             movement.x -= 1;
         }
 
-       
 
+
+        direction = movement;
       
 
         movement *= actualSpeed * Time.fixedDeltaTime;
@@ -81,6 +86,34 @@ public class PlayerMovement : MonoBehaviour
         transform.position = spawnPosition;
     }
 
+    void UpdateLegs()
+    {
+        
+        if (direction != Vector2.zero)
+        {
+            legs.gameObject.SetActive(true);
+        }
+        else
+        {
+            legs.gameObject.SetActive(false);
+        }
+        var rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        legs.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+    }
+
+    public void SetLegs(bool _state)
+    {
+        if (_state) //on
+        {
+            
+        }
+        else //off
+        {
+            
+        }
+    }
+
+    
 //    private void OnCollisionEnter2D(Collision2D other)
 //    {
 //        var tag = other.gameObject.tag;

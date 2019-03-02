@@ -9,6 +9,8 @@ public class BulletBehaviour : MonoBehaviour
 
     [SerializeField] private Vector2 direction;
     [SerializeField] private Rigidbody2D bulletRb;
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -41,17 +43,20 @@ public class BulletBehaviour : MonoBehaviour
         GameManager.instance.gameBullets.Add(this);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        
         var tag = other.gameObject.tag;
         var mytag = gameObject.tag;
         if (mytag == "PlayerBullet")
         {
             if (tag != "Player")
             {
+                print("collide");
+                
                 switch (tag)
                 {
-                    case "Shadow":
+                    case "PlayerShadow":
 
                         GameManager.instance.RemoveShadowAt(other.GetComponent<ShadowBehaviour>());
                         
@@ -99,7 +104,14 @@ public class BulletBehaviour : MonoBehaviour
     }
     public void DestroyBullet()
     {
-        GameManager.instance.gameBullets.RemoveAt(GameManager.instance.gameBullets.IndexOf(this));
-        Destroy(this.gameObject);
+        var index = GameManager.instance.gameBullets.IndexOf(this);
+
+        print(index);
+        if (index > 0)
+        {
+            GameManager.instance.gameBullets.RemoveAt(index);
+            Destroy(this.gameObject);
+        }
+       
     }
 }

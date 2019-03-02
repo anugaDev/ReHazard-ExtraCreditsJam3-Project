@@ -42,6 +42,11 @@ public class ShadowCreator : MonoBehaviour
         playerRecords = _records;
     }
 
+    public void ErasePlayerRecords()
+    {
+        playerRecords = new List<RoundRecordContainer>();
+    }
+
     public void ResetShadows()
     {
         foreach (var shadow in levelShadows)

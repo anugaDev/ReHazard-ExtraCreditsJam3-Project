@@ -14,6 +14,7 @@ public class ShadowBehaviour : MonoBehaviour
         startingWaitTime,
         loopPauseTime,
         bulletSpeed,
+        bulletOffset,
         timeBetweenChangingPositions
         ;
 
@@ -161,7 +162,8 @@ public class ShadowBehaviour : MonoBehaviour
     private void ShadowShoot()
     {
         var rotationZ = Mathf.Atan2(actualInQeueAction.shootingDir.y, actualInQeueAction.shootingDir.x) * Mathf.Rad2Deg;
-        var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, rotationZ)).GetComponent<BulletBehaviour>();
+        Vector3 direction = actualInQeueAction.shootingDir;
+        var bullet = Instantiate(bulletPrefab, transform.position + (direction * bulletOffset) , Quaternion.Euler(0.0f, 0.0f, rotationZ)).GetComponent<BulletBehaviour>();
         bullet.SetBullet(bulletSpeed,actualInQeueAction.shootingDir,bullet.GetComponent<Rigidbody2D>());
         
         if (actualInQeueAction ==

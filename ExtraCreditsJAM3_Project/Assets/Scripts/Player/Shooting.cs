@@ -13,8 +13,10 @@ public class Shooting : MonoBehaviour
     [SerializeField] private bool isReloaded;
     [SerializeField] private float
         bulletSpeed,
-        timeBetweenShoots
+        timeBetweenShoots,
+        shootingOffset
         ;
+    
     
     void Start()
     {
@@ -37,14 +39,14 @@ public class Shooting : MonoBehaviour
     public void Shoot()
     {
 
-        var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        var bullet = Instantiate(bulletPrefab, transform.position + (GetForwardDir() * shootingOffset), transform.rotation);
         var bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
         bulletBehaviour.SetBullet(bulletSpeed, GetForwardDir(),bullet.GetComponent<Rigidbody2D>());
         recorder.AddShootingRecord();
         StartCoroutine(Reload());
     }
 
-    Vector2 GetForwardDir()
+    Vector3 GetForwardDir()
     {
         var direction = transform.right;
 
