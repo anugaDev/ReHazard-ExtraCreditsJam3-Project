@@ -120,6 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b317b3043d54d478edb2588a9aa7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 199759765, guid: a215bd36fdd428042b23ac818eabcb66, type: 3}
+  shadowSpeed: 200
+  shadowRotSpeed: 20
+  inPositionRadius: 0.2
+  startMovingTime: 0
+  startingWaitTime: 0
+  loopPauseTime: 1
+  bulletSpeed: 200
 --- !u!50 &2024053052102802396
 Rigidbody2D:
   serializedVersion: 4

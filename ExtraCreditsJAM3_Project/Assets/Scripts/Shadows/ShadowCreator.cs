@@ -43,6 +43,10 @@ public class ShadowCreator : MonoBehaviour
 
     public void ResetShadows()
     {
+        foreach (var shadow in levelShadows)
+        {
+            Destroy(shadow.gameObject);
+        }
         levelShadows.Clear();
     }
 }

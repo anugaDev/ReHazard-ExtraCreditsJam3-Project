@@ -5,12 +5,12 @@ using UnityEngine;
 public class ShootingRecord 
 {
     public float instant;
-    public float shootingRotationZ;
+    public Vector2 shootingDir;
     
-    public ShootingRecord(float _instant, float _rotationZ)
+    public ShootingRecord(float _instant, Vector2 _shootingDir)
     {
         this.instant = _instant;
-        this.shootingRotationZ = _rotationZ;
+        this.shootingDir = _shootingDir;
     }
     
     

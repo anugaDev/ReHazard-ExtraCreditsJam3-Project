@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public
         PlayerRecorder playerRec;
 
-    private List<RoundRecordContainer> roundPlayerRecords;
+    private List<RoundRecordContainer> roundPlayerRecords = new List<RoundRecordContainer>();
 
     public ShadowCreator levelShadowcreator;
     // Start is called before the first frame update
@@ -41,6 +41,11 @@ public class GameManager : MonoBehaviour
 
     public void StartRound()
     {
+        levelShadowcreator.ResetShadows();
+        levelShadowcreator.SetPlayerRecords(roundPlayerRecords);
+        levelShadowcreator.CreateShadows();
+        playerMov.ResetToSpawn();
+        playerRec.ResetRecord();
         roundStartTime = Time.time;
     }
 
@@ -50,7 +55,12 @@ public class GameManager : MonoBehaviour
     }
 
     private void CheckForFinish()
+    
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            FinishRound(true);
+        }
         
     }
 
@@ -60,12 +70,15 @@ public class GameManager : MonoBehaviour
         {
             playerRec.isRecording = false;
             playerRec.RecordRound();
-            playerRec.ResetRecord();
+            
+            
+           StartRound();
 
         }
         else
         {
             playerRec.isRecording = false;
+            StartRound();
         }
     }
     

@@ -8,6 +8,7 @@ public class ShadowBehaviour : MonoBehaviour
     private Transform bulletPrefab;
     [SerializeField] private float 
         shadowSpeed,
+        shadowRotSpeed,
         inPositionRadius,
         startMovingTime,
         startingWaitTime,
@@ -22,7 +23,7 @@ public class ShadowBehaviour : MonoBehaviour
     private ShootingRecord actualInQeueAction;
 
     private Rigidbody2D shadowRb;
-    private bool isMoving, allActionsMade;
+    private bool isMoving = false, allActionsMade;
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class ShadowBehaviour : MonoBehaviour
         if (isMoving)
         {
             UpdateMovement();
+            UpdateRotation();
             CheckForPosition();
             CheckForShooting();
         }
@@ -46,12 +48,16 @@ public class ShadowBehaviour : MonoBehaviour
         this.shadowActionsRecord = _shadowActionsRecord;
         
         actualPositionTarget = shadowActionsRecord.roundMovementRecords[0];
-        actualInQeueAction = shadowActionsRecord.roundShootingRecords[0];
+        if (_shadowActionsRecord.roundShootingRecords.Count > 0)
+            actualInQeueAction = shadowActionsRecord.roundShootingRecords[0];
+        else allActionsMade = true;
+        
+        startMovingTime = Time.time;
 
         transform.position = actualPositionTarget.position;
 
         StartCoroutine(WaitTime(startingWaitTime));
-        allActionsMade = false;
+        
 
     }
 
@@ -64,8 +70,12 @@ public class ShadowBehaviour : MonoBehaviour
 
     private void UpdateRotation()
     {
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, actualPositionTarget.direction, Time.deltaTime, 0.0f);
-        transform.rotation = Quaternion.LookRotation(newDir);
+      
+        var rotationZ = Mathf.Atan2(actualPositionTarget.direction.y, actualPositionTarget.direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        
+       
+
     }
 
     private void CheckForPosition()
@@ -98,30 +108,45 @@ public class ShadowBehaviour : MonoBehaviour
     private void CheckForShooting()
     {
         var actualTime = Time.time;
-        if ((actualTime - startMovingTime) >= actualInQeueAction.instant && !allActionsMade) return;
-        
-        ShadowShoot();
-        
+
+       
+        if (!allActionsMade)
+        {
+            if ((actualTime - startMovingTime) >= actualInQeueAction.instant)
+            {
+                ShadowShoot();
+
+            }
+        }
+       
+
+
     }
 
     private void ShadowShoot()
     {
-        var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-        var bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
-        
-        var direction = new Vector2(Mathf.Cos(actualInQeueAction.shootingRotationZ),Mathf.Sin(actualInQeueAction.shootingRotationZ));
-        bulletBehaviour.SetBullet(bulletSpeed,direction,bullet.GetComponent<Rigidbody2D>());
-
-
         if (actualInQeueAction ==
-            shadowActionsRecord.roundShootingRecords[shadowActionsRecord.roundMovementRecords.Count - 1])
+            shadowActionsRecord.roundShootingRecords[shadowActionsRecord.roundShootingRecords.Count - 1])
         {
+            
             allActionsMade = true;
         }
         else
         {
+           
             SetNextAction();
         }
+        var rotationZ = Mathf.Atan2(actualInQeueAction.shootingDir.y, actualInQeueAction.shootingDir.x) * Mathf.Rad2Deg;
+        var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, rotationZ)).GetComponent<BulletBehaviour>();
+        
+        
+        
+        bullet.SetBullet(bulletSpeed,actualInQeueAction.shootingDir,bullet.GetComponent<Rigidbody2D>());
+
+
+       
+        
+        
     }
 
    
@@ -132,21 +157,34 @@ public class ShadowBehaviour : MonoBehaviour
 
     private void ResetShadow()
     {
-        actualPositionTarget = shadowActionsRecord.roundMovementRecords[0];
-        actualInQeueAction = shadowActionsRecord.roundShootingRecords[0];
-
-        WaitTime((loopPauseTime));
         
-        transform.position = actualPositionTarget.position;
-        allActionsMade = false;
+        actualPositionTarget = shadowActionsRecord.roundMovementRecords[0];
+        if (shadowActionsRecord.roundShootingRecords.Count > 0)
+        {
+            actualInQeueAction = shadowActionsRecord.roundShootingRecords[0];
+            allActionsMade = false;
+        }
+           
+        else allActionsMade = true;
+
+        shadowRb.velocity = Vector3.zero;
+        
+        StartCoroutine (WaitTime(loopPauseTime));
+        
+       
 
     }
 
     IEnumerator WaitTime(float _waitTime)
     {
+       
         isMoving = false;
         yield return new WaitForSeconds(_waitTime);
         isMoving = true;
         startMovingTime = Time.time;
+        
+        transform.position = actualPositionTarget.position;
+       
+        
     }
 }
