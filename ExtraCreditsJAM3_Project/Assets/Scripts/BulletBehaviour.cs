@@ -107,11 +107,12 @@ public class BulletBehaviour : MonoBehaviour
         var index = GameManager.instance.gameBullets.IndexOf(this);
 
         print(index);
-        if (index > 0)
+        if (index >= 0)
         {
             GameManager.instance.gameBullets.RemoveAt(index);
-            Destroy(this.gameObject);
+           
         }
+        Destroy(this.gameObject);
        
     }
 }

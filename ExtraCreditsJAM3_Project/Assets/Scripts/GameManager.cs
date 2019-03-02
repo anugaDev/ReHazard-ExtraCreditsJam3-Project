@@ -88,7 +88,8 @@ public class GameManager : MonoBehaviour
         else
         {
             playerRec.isRecording = false;
-            levelShadowcreator.ErasePlayerRecords();
+            
+            roundPlayerRecords = new List<RoundRecordContainer>();
            
         }
 
