@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D playerRb;
 
-    public Vector2 m_LookingVector;
+   
 
     [SerializeField] private float
         defaultSpeed;
@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
 
         movement *= actualSpeed * Time.fixedDeltaTime;
 
-//        print(movement);
 
 
 

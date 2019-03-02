@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ShootingRecord 
 {
-    private float instant;
-    private float shootingRotationZ;
+    public float instant;
+    public float shootingRotationZ;
     
     public ShootingRecord(float _instant, float _rotationZ)
     {

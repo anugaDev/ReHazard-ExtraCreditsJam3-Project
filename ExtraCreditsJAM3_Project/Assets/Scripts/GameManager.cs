@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
         PlayerRecorder playerRec;
 
     private List<RoundRecordContainer> roundPlayerRecords;
+
+    public ShadowCreator levelShadowcreator;
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,9 +39,9 @@ public class GameManager : MonoBehaviour
         CheckForFinish();
     }
 
-    public void StartRound(float _time)
+    public void StartRound()
     {
-        roundStartTime = _time;
+        roundStartTime = Time.time;
     }
 
     public void StoreRecordRound(List<MovementRecord> _movements, List<ShootingRecord> _shootings)

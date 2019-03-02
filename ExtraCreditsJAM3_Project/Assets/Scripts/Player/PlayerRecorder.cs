@@ -30,7 +30,7 @@ public class PlayerRecorder : MonoBehaviour
 
     public void AddShootingRecord()
     {
-        var shootTime = Time.timeScale - GameManager.instance.roundStartTime;
+        var shootTime = Time.time - GameManager.instance.roundStartTime;
         playerShootingRecords.Add(new ShootingRecord(shootTime, transform.rotation.eulerAngles.z));
     }
 

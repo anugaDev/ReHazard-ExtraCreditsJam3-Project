@@ -5,8 +5,8 @@ using UnityEngine;
 public class RoundRecordContainer : MonoBehaviour
 {
 
-    private List<MovementRecord> roundMovementRecords;
-    private List<ShootingRecord> roundShootingRecords;
+    public List<MovementRecord> roundMovementRecords;
+    public List<ShootingRecord> roundShootingRecords;
 
     public RoundRecordContainer(List<MovementRecord> roundMovementRecords, List<ShootingRecord> roundShootingRecords)
     {

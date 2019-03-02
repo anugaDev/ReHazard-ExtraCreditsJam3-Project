@@ -5,8 +5,8 @@ using UnityEngine;
 public class MovementRecord
 {
     // Start is called before the first frame update
-    private Vector3 position;
-    private Vector2 direction;
+    public Vector3 position;
+    public Vector2 direction;
 
     public MovementRecord(Vector3 _position, Vector2 _direction)
     {

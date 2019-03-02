@@ -20,6 +20,10 @@
             <e p="RoundRecordContainer.cs" t="Include" />
             <e p="ShootingRecord.cs" t="Include" />
           </e>
+          <e p="Shadows" t="Include">
+            <e p="ShadowBehaviour.cs" t="Include" />
+            <e p="ShadowCreator.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="ExtraCreditsJAM3_Project.sln" t="IncludeFlat" />
