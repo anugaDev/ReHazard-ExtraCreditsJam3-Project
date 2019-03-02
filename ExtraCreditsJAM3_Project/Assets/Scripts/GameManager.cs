@@ -46,11 +46,14 @@ public class GameManager : MonoBehaviour
         levelShadowcreator.CreateShadows();
         playerMov.ResetToSpawn();
         playerRec.ResetRecord();
+        
+        playerRec.BeginRound();
         roundStartTime = Time.time;
     }
 
     public void StoreRecordRound(List<MovementRecord> _movements, List<ShootingRecord> _shootings)
     {
+        print(_movements.Count);
         roundPlayerRecords.Add(new RoundRecordContainer(_movements,_shootings));
     }
 
@@ -70,9 +73,9 @@ public class GameManager : MonoBehaviour
         {
             playerRec.isRecording = false;
             playerRec.RecordRound();
-            
-            
-           StartRound();
+
+
+            StartRound();
 
         }
         else
@@ -81,5 +84,7 @@ public class GameManager : MonoBehaviour
             StartRound();
         }
     }
+
+
     
 }

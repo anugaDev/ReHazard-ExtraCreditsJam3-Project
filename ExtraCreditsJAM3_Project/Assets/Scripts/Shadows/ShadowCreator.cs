@@ -8,6 +8,7 @@ public class ShadowCreator : MonoBehaviour
 
     public List<RoundRecordContainer> playerRecords = new List<RoundRecordContainer>();
 
+
     [SerializeField] private GameObject shadowPrefab;
     // Start is called before the first frame update
     void Start()

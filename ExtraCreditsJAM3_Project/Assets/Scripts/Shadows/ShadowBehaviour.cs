@@ -13,8 +13,11 @@ public class ShadowBehaviour : MonoBehaviour
         startMovingTime,
         startingWaitTime,
         loopPauseTime,
-        bulletSpeed
+        bulletSpeed,
+        timeBetweenChangingPositions
         ;
+
+    private float timeForPosChange = 0;
     
 
     [HideInInspector] public RoundRecordContainer shadowActionsRecord;
@@ -23,7 +26,7 @@ public class ShadowBehaviour : MonoBehaviour
     private ShootingRecord actualInQeueAction;
 
     private Rigidbody2D shadowRb;
-    private bool isMoving = false, allActionsMade;
+    private bool isMoving = false, allActionsMade, allPositionsMade;
     
     // Start is called before the first frame update
     void Start()
@@ -40,11 +43,18 @@ public class ShadowBehaviour : MonoBehaviour
             UpdateRotation();
             CheckForPosition();
             CheckForShooting();
+
+            if (allActionsMade && allPositionsMade)
+            {
+                ResetShadow();
+            }
         }
-        
+        print(timeBetweenChangingPositions);
     }
     public void SetBehaviour(RoundRecordContainer _shadowActionsRecord)
     {
+       
+        
         this.shadowActionsRecord = _shadowActionsRecord;
         
         actualPositionTarget = shadowActionsRecord.roundMovementRecords[0];
@@ -56,8 +66,12 @@ public class ShadowBehaviour : MonoBehaviour
 
         transform.position = actualPositionTarget.position;
 
+        timeBetweenChangingPositions = GameManager.instance.playerRec.recordTime;
+
         StartCoroutine(WaitTime(startingWaitTime));
-        
+
+        allPositionsMade = false;
+
 
     }
 
@@ -65,7 +79,19 @@ public class ShadowBehaviour : MonoBehaviour
     {
         var direction = actualPositionTarget.position - transform.position;
         direction.Normalize();
-        shadowRb.velocity = direction * shadowSpeed * Time.fixedDeltaTime;
+        
+        
+        
+        if ((actualPositionTarget.position - transform.position).magnitude > inPositionRadius)
+        {
+            shadowRb.velocity = direction * shadowSpeed * Time.fixedDeltaTime;
+        }
+        else
+        {
+            shadowRb.velocity = Vector3.zero;
+        }
+       
+        
     }
 
     private void UpdateRotation()
@@ -80,31 +106,25 @@ public class ShadowBehaviour : MonoBehaviour
 
     private void CheckForPosition()
     {
-        if (!((actualPositionTarget.position - transform.position).magnitude < inPositionRadius)) return;
-        if (actualPositionTarget ==
-            shadowActionsRecord.roundMovementRecords[shadowActionsRecord.roundMovementRecords.Count - 1])
+        if (!allPositionsMade)
         {
-            ResetShadow();
-        }
-        else
-        {
-            SetNextPosition();
-        }
-    }
+            
+            timeForPosChange += Time.deltaTime;
+            if (!(timeForPosChange >= timeBetweenChangingPositions)) return;
+            if (actualPositionTarget ==
+                shadowActionsRecord.roundMovementRecords[shadowActionsRecord.roundMovementRecords.Count - 1])
+            {
+                allPositionsMade = true;
+            }
+            else
+            {
+                SetNextPosition();
+            }
 
-    private void SetNextPosition()
-    {
-        actualPositionTarget =
-            shadowActionsRecord.roundMovementRecords
-            [shadowActionsRecord.roundMovementRecords.IndexOf(actualPositionTarget) + 1];
-    }
-    private void SetNextAction()
-    {
-        actualInQeueAction =
-            shadowActionsRecord.roundShootingRecords
-                [shadowActionsRecord.roundShootingRecords.IndexOf(actualInQeueAction) + 1];
-    }
+            timeForPosChange = 0;
+        }
 
+    }
     private void CheckForShooting()
     {
         var actualTime = Time.time;
@@ -123,8 +143,27 @@ public class ShadowBehaviour : MonoBehaviour
 
     }
 
+    private void SetNextPosition()
+    {
+        actualPositionTarget =
+            shadowActionsRecord.roundMovementRecords
+            [shadowActionsRecord.roundMovementRecords.IndexOf(actualPositionTarget) + 1];
+    }
+    private void SetNextAction()
+    {
+        actualInQeueAction =
+            shadowActionsRecord.roundShootingRecords
+                [shadowActionsRecord.roundShootingRecords.IndexOf(actualInQeueAction) + 1];
+    }
+
+    
+
     private void ShadowShoot()
     {
+        var rotationZ = Mathf.Atan2(actualInQeueAction.shootingDir.y, actualInQeueAction.shootingDir.x) * Mathf.Rad2Deg;
+        var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, rotationZ)).GetComponent<BulletBehaviour>();
+        bullet.SetBullet(bulletSpeed,actualInQeueAction.shootingDir,bullet.GetComponent<Rigidbody2D>());
+        
         if (actualInQeueAction ==
             shadowActionsRecord.roundShootingRecords[shadowActionsRecord.roundShootingRecords.Count - 1])
         {
@@ -136,17 +175,6 @@ public class ShadowBehaviour : MonoBehaviour
            
             SetNextAction();
         }
-        var rotationZ = Mathf.Atan2(actualInQeueAction.shootingDir.y, actualInQeueAction.shootingDir.x) * Mathf.Rad2Deg;
-        var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, rotationZ)).GetComponent<BulletBehaviour>();
-        
-        
-        
-        bullet.SetBullet(bulletSpeed,actualInQeueAction.shootingDir,bullet.GetComponent<Rigidbody2D>());
-
-
-       
-        
-        
     }
 
    
@@ -170,8 +198,8 @@ public class ShadowBehaviour : MonoBehaviour
         shadowRb.velocity = Vector3.zero;
         
         StartCoroutine (WaitTime(loopPauseTime));
-        
-       
+
+        allPositionsMade = false;
 
     }
 
@@ -185,6 +213,6 @@ public class ShadowBehaviour : MonoBehaviour
         
         transform.position = actualPositionTarget.position;
        
-        
+        timeForPosChange = 0;
     }
 }
