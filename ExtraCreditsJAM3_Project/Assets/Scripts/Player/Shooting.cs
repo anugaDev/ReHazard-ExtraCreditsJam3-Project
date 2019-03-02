@@ -46,16 +46,10 @@ public class Shooting : MonoBehaviour
 
     Vector2 GetForwardDir()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = -gameCamera.transform.position.z;
-        Vector3 l_objectPos = gameCamera.WorldToScreenPoint(transform.position);
+        var direction = transform.right;
 
-        mousePos.x -= l_objectPos.x;
-        mousePos.y -= l_objectPos.y;
-
-        mousePos.Normalize();
         
-        return mousePos;
+        return direction;
     }
 
     IEnumerator Reload()
