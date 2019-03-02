@@ -88,6 +88,19 @@ public class GameManager : MonoBehaviour
             playerRec.isRecording = false;
             StartRound();
         }
+
+        foreach (var bullet in gameBullets)
+        {
+            Destroy(bullet);
+                
+        }
+        gameBullets.Clear();
+    }
+
+    public void RemoveShadowAt(ShadowBehaviour _shadow)
+    {
+        levelShadowcreator.levelShadows.RemoveAt((levelShadowcreator.levelShadows.IndexOf(_shadow)));
+        Destroy(_shadow.gameObject);
     }
 
 

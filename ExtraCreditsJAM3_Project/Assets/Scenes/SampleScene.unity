@@ -228,6 +228,7 @@ MonoBehaviour:
   playerMov: {fileID: 0}
   playerRec: {fileID: 0}
   levelShadowcreator: {fileID: 0}
+  gameBullets: []
 --- !u!4 &904900572
 Transform:
   m_ObjectHideFlags: 0
@@ -255,7 +256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelShadows: []
-  playerRecords: []
   shadowPrefab: {fileID: 2405248047514709945, guid: 7d045ec15ef9a784395fedad6373669c,
     type: 3}
 --- !u!1001 &1222125871927301358
@@ -283,7 +283,7 @@ PrefabInstance:
     - target: {fileID: 1222125870435958179, guid: e36d26e3fc03b804aa74afa06922bf27,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.025390625
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1222125870435958179, guid: e36d26e3fc03b804aa74afa06922bf27,
         type: 3}
@@ -324,6 +324,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222125870435958178, guid: e36d26e3fc03b804aa74afa06922bf27,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 860aca563cc607149b2dc8965c115959,
+        type: 3}
+    - target: {fileID: 1222125870435958176, guid: e36d26e3fc03b804aa74afa06922bf27,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222125870435958176, guid: e36d26e3fc03b804aa74afa06922bf27,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222125870435958176, guid: e36d26e3fc03b804aa74afa06922bf27,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222125870435958176, guid: e36d26e3fc03b804aa74afa06922bf27,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.76
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e36d26e3fc03b804aa74afa06922bf27, type: 3}

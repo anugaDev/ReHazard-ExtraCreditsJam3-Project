@@ -47,23 +47,59 @@ public class BulletBehaviour : MonoBehaviour
         var mytag = gameObject.tag;
         if (mytag == "PlayerBullet")
         {
-            if (other.tag != "Player" || other.tag != "PlayerShadow")
+            if (tag != "Player")
             {
+                switch (tag)
+                {
+                    case "Shadow":
+
+                        GameManager.instance.RemoveShadowAt(other.GetComponent<ShadowBehaviour>());
+                        
+                        break;
+                    
+                    case "ShadowBullet":
+
+                        other.GetComponent<BulletBehaviour>().DestroyBullet();
+                        
+                        break;
+                    
+                }
                 
                 
-                
-                GameManager.instance.gameBullets.RemoveAt(GameManager.instance.gameBullets.IndexOf(this));
-                Destroy(this.gameObject);
+               DestroyBullet();
             }
             
         }
         else
         {
-            if (other.tag != "PlayerShadow" || other.tag != "Enemy")
+            if (tag != "PlayerShadow" || tag != "Enemy")
             {
-                GameManager.instance.gameBullets.RemoveAt(GameManager.instance.gameBullets.IndexOf(this));
-                Destroy(this.gameObject);
+                switch (tag)
+                {
+                    case "Player":
+
+                        GameManager.instance.FinishRound(false);
+                        
+                        break;
+                    
+                    case "PlayerBullet":
+
+                        other.GetComponent<BulletBehaviour>().DestroyBullet();
+                        
+                        break;
+                    
+                }
+
+               
+                DestroyBullet();
             }
         }
+
+        
+    }
+    public void DestroyBullet()
+    {
+        GameManager.instance.gameBullets.RemoveAt(GameManager.instance.gameBullets.IndexOf(this));
+        Destroy(this.gameObject);
     }
 }
