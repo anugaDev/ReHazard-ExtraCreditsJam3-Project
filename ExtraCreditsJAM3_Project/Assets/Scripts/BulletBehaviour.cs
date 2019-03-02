@@ -37,5 +37,33 @@ public class BulletBehaviour : MonoBehaviour
         this.bulletSpeed = bulletSpeed;
         this.direction = direction;
         this.bulletRb = bulletRb;
+
+        GameManager.instance.gameBullets.Add(this);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var tag = other.gameObject.tag;
+        var mytag = gameObject.tag;
+        if (mytag == "PlayerBullet")
+        {
+            if (other.tag != "Player" || other.tag != "PlayerShadow")
+            {
+                
+                
+                
+                GameManager.instance.gameBullets.RemoveAt(GameManager.instance.gameBullets.IndexOf(this));
+                Destroy(this.gameObject);
+            }
+            
+        }
+        else
+        {
+            if (other.tag != "PlayerShadow" || other.tag != "Enemy")
+            {
+                GameManager.instance.gameBullets.RemoveAt(GameManager.instance.gameBullets.IndexOf(this));
+                Destroy(this.gameObject);
+            }
+        }
     }
 }

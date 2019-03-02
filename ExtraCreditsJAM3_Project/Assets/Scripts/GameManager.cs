@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     private List<RoundRecordContainer> roundPlayerRecords = new List<RoundRecordContainer>();
 
     public ShadowCreator levelShadowcreator;
+
+    public List<BulletBehaviour> gameBullets = new List<BulletBehaviour>();
+    
+    
+    
     // Start is called before the first frame update
     void Awake()
     {
