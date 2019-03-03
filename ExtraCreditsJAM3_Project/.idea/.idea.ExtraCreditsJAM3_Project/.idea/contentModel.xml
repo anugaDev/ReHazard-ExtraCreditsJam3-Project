@@ -210,11 +210,13 @@
             </e>
           </e>
           <e p="BulletBehaviour.cs" t="Include" />
-          <e p="EnemyBlackboard.cs" t="Include" />
-          <e p="FSM_WanderingEnemy.cs" t="Include" />
+          <e p="Enemies" t="Include">
+            <e p="EnemyBlackboard.cs" t="Include" />
+            <e p="FSM_WanderingEnemy.cs" t="Include" />
+            <e p="PathFeeder.cs" t="Include" />
+            <e p="PathFollowing.cs" t="Include" />
+          </e>
           <e p="GameManager.cs" t="Include" />
-          <e p="PathFeeder.cs" t="Include" />
-          <e p="PathFollowing.cs" t="Include" />
           <e p="Player" t="Include">
             <e p="PlayerMovement.cs" t="Include" />
             <e p="PlayerRecorder.cs" t="Include" />

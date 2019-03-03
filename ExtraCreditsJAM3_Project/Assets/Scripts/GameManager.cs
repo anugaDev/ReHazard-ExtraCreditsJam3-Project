@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
 
     public List<BulletBehaviour> gameBullets = new List<BulletBehaviour>();
     public List<Transform>  levelEnemies = new List<Transform>();
-    
-    
+
+    public bool startRound;
     
     // Start is called before the first frame update
     void Awake()
