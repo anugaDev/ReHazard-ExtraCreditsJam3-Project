@@ -51,7 +51,7 @@ public class ShadowBehaviour : MonoBehaviour
                 ResetShadow();
             }
         }
-        print(timeBetweenChangingPositions);
+        
     }
     public void SetBehaviour(RoundRecordContainer _shadowActionsRecord)
     {

@@ -217,6 +217,7 @@
           </e>
           <e p="Game Settings" t="Include">
             <e p="GameManager.cs" t="Include" />
+            <e p="GUIManager.cs" t="Include" />
             <e p="LevelSettings.cs" t="Include" />
           </e>
           <e p="Player" t="Include">

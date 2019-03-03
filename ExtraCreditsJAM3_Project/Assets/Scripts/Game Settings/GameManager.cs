@@ -20,9 +20,13 @@ public class GameManager : MonoBehaviour
     public ShadowCreator levelShadowcreator;
 
     public List<BulletBehaviour> gameBullets = new List<BulletBehaviour>();
-    public List<Transform>  levelEnemies = new List<Transform>();
+    public List<Transform>  levelEnemies, actualEnemies = new List<Transform>();
 
-    public bool startRound;
+    public LevelSettings levelSettings;
+
+    public GUIManager levelGUI;
+
+    public bool onRound;
     
     // Start is called before the first frame update
     void Awake()
@@ -30,6 +34,8 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            
+            DontDestroyOnLoad(this.gameObject);
             
 
         }
@@ -47,6 +53,10 @@ public class GameManager : MonoBehaviour
 
     public void StartRound()
     {
+        playerMov.gameObject.SetActive(true);
+
+        levelSettings.actualLevelTime = 0;
+        
         levelShadowcreator.SetPlayerRecords(roundPlayerRecords);
         levelShadowcreator.CreateShadows();
         playerMov.ResetToSpawn();
@@ -58,16 +68,29 @@ public class GameManager : MonoBehaviour
 
     public void StoreRecordRound(List<MovementRecord> _movements, List<ShootingRecord> _shootings)
     {
-        print(_movements.Count);
+        
         roundPlayerRecords.Add(new RoundRecordContainer(_movements,_shootings));
     }
 
     private void CheckForFinish()
     
     {
-        if (Input.GetKeyDown(KeyCode.R) && levelShadowcreator.levelShadows.Count <= 0)
+        if (Input.GetKeyDown(KeyCode.R) && levelShadowcreator.levelShadows.Count <= 0 &&  levelEnemies.Count <= 0)
         {
             FinishRound(true);
+        }
+        else if (levelSettings.actualLevelTime > levelSettings.levelTime)
+        {
+            FinishRound(false);
+        }
+        else
+        {
+            levelSettings.actualLevelTime += Time.deltaTime;
+            
+            levelGUI.UpdateTimeGUI(levelSettings.actualLevelTime,levelSettings.levelTime);
+            
+            levelGUI.UpdateLoopText(levelSettings.actualLoops,levelSettings.loopTimes);
+            
         }
         
     }
@@ -77,20 +100,33 @@ public class GameManager : MonoBehaviour
         levelShadowcreator.ResetShadows();
 
         
+        
         if (_win)
         {
+            levelSettings.AddEndedLoop();
             playerRec.isRecording = false;
             playerRec.RecordRound();
-
-
-           
-
+            
+            if (levelSettings.LevelHasEnded())
+            {
+                levelGUI.GameSuccessUI();
+            }
+            else
+            {
+                StartRound();
+            }
         }
         else
         {
+            playerMov.gameObject.SetActive(false);
+            
+            levelSettings.ResetLoops();
+            
             playerRec.isRecording = false;
             
             roundPlayerRecords = new List<RoundRecordContainer>();
+            
+            levelGUI.GameOverUI();
            
         }
 
@@ -100,9 +136,10 @@ public class GameManager : MonoBehaviour
                 
         }
         gameBullets = new List<BulletBehaviour>();
+
         
         
-        StartRound();
+        //StartRound();
     }
 
     public void RemoveShadowAt(ShadowBehaviour _shadow)

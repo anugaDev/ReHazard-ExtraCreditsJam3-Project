@@ -16,8 +16,12 @@ public class Shooting : MonoBehaviour
         timeBetweenShoots,
         shootingOffset
         ;
-    
-    
+
+    private void OnEnable()
+    {
+        isReloaded = true;
+    }
+
     void Start()
     {
         gameCamera = gameCamera == null ? Camera.main : gameCamera;

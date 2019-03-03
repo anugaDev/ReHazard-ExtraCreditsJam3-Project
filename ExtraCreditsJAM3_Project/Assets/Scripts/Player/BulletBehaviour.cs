@@ -9,6 +9,7 @@ public class BulletBehaviour : MonoBehaviour
 
     [SerializeField] private Vector2 direction;
     [SerializeField] private Rigidbody2D bulletRb;
+    private bool isHit = false;
 
     
     
@@ -48,12 +49,13 @@ public class BulletBehaviour : MonoBehaviour
         
         var tag = other.gameObject.tag;
         var mytag = gameObject.tag;
+
+        if (isHit) return;
         if (mytag == "PlayerBullet")
         {
-            if (tag != "Player")
+            if (tag != "Player" && tag != "ShadowBullet")
             {
-                print("collide");
-                
+                isHit = true;
                 switch (tag)
                 {
                     case "PlayerShadow":
@@ -62,24 +64,23 @@ public class BulletBehaviour : MonoBehaviour
                         
                         break;
                     
-                    case "ShadowBullet":
-
-                        other.GetComponent<BulletBehaviour>().DestroyBullet();
-                        
-                        break;
+            
                     
                 }
                 
                 
-               DestroyBullet();
+                DestroyBullet();
             }
             
         }
         else
         {
-            if (tag != "PlayerShadow" || tag != "Enemy")
+            if (tag != "PlayerShadow" && tag != "Enemy" && tag != "PlayerBullet" && tag != "ShadowBullet")
             {
-                switch (tag)
+                print("collide");
+                isHit = true;
+
+                switch (tag )
                 {
                     case "Player":
 
@@ -89,7 +90,7 @@ public class BulletBehaviour : MonoBehaviour
                     
                     case "PlayerBullet":
 
-                        other.GetComponent<BulletBehaviour>().DestroyBullet();
+                        //other.GetComponent<BulletBehaviour>().DestroyBullet();
                         
                         break;
                     
@@ -100,7 +101,10 @@ public class BulletBehaviour : MonoBehaviour
             }
         }
 
-        
+
+
+
+
     }
     public void DestroyBullet()
     {
