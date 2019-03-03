@@ -110,9 +110,6 @@ public class ShadowBehaviour : MonoBehaviour
         var q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.fixedDeltaTime * shadowRotSpeed);
 
-//        var rotationZ = Mathf.Atan2(actualPositionTarget.direction.y, actualPositionTarget.direction.x) * Mathf.Rad2Deg;
-//        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
-        
         
        
 

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public ShadowCreator levelShadowcreator;
 
     public List<BulletBehaviour> gameBullets = new List<BulletBehaviour>();
+    public List<Transform>  levelEnemies = new List<Transform>();
     
     
     
