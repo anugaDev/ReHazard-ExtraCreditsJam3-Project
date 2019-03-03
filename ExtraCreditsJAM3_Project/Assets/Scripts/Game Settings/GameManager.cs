@@ -111,6 +111,12 @@ public class GameManager : MonoBehaviour
         Destroy(_shadow.gameObject);
     }
 
+    public void KillEnemy(Transform enemy)
+    {
+        levelEnemies.RemoveAt(levelEnemies.IndexOf(enemy));
+        Destroy(enemy.gameObject);
+    }
+
 
     
 }

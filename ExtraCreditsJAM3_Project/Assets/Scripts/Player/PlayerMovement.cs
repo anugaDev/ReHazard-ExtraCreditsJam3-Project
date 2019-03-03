@@ -117,33 +117,5 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-//    private void OnCollisionEnter2D(Collision2D other)
-//    {
-//        var tag = other.gameObject.tag;
-//
-//        switch (tag)
-//        {
-//            case "Enemy" :
-//                
-//                
-//                
-//                break;
-//            
-//        }
-//    }
-//
-//    private void OnTriggerEnter2D(Collider2D other)
-//    {
-//        var tag = other.gameObject.tag;
-//
-//        switch (tag)
-//        {
-//            case "ShadowBullet" :
-//                
-//                GameManager.instance.FinishRound(false);
-//                
-//                break;
-//            
-//        }
-//    }
+
 }

@@ -209,15 +209,18 @@
               <e p="UnityReferenceHelper.cs" t="Include" />
             </e>
           </e>
-          <e p="BulletBehaviour.cs" t="Include" />
           <e p="Enemies" t="Include">
             <e p="EnemyBlackboard.cs" t="Include" />
             <e p="FSM_WanderingEnemy.cs" t="Include" />
             <e p="PathFeeder.cs" t="Include" />
             <e p="PathFollowing.cs" t="Include" />
           </e>
-          <e p="GameManager.cs" t="Include" />
+          <e p="Game Settings" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="LevelSettings.cs" t="Include" />
+          </e>
           <e p="Player" t="Include">
+            <e p="BulletBehaviour.cs" t="Include" />
             <e p="PlayerMovement.cs" t="Include" />
             <e p="PlayerRecorder.cs" t="Include" />
             <e p="PlayerRotate.cs" t="Include" />

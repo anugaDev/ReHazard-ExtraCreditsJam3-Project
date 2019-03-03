@@ -173,7 +173,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5b498191f05b7cb4d9372248d81aa6f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -269,6 +269,6 @@ MonoBehaviour:
   startingWaitTime: 0
   loopPauseTime: 1
   bulletSpeed: 500
-  bulletOffset: 1
+  bulletOffset: 1.2
   timeBetweenChangingPositions: 0
   legs: {fileID: 1892241137}
