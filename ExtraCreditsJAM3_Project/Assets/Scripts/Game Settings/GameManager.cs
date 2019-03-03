@@ -22,11 +22,13 @@ public class GameManager : MonoBehaviour
     public List<BulletBehaviour> gameBullets = new List<BulletBehaviour>();
     public List<Enemy> actualLevelEnemies = new List<Enemy>();
 
+    public CameraActions levelCamera;
+
     public LevelSettings levelSettings;
 
     public GUIManager levelGUI;
 
-    public bool onRound;
+    public bool onRound, failed;
     
     // Start is called before the first frame update
     void Awake()
@@ -63,20 +65,27 @@ public class GameManager : MonoBehaviour
     {
         if(onRound)
          CheckForFinish();
+
+        else
+        {
+            if(failed && Input.GetKeyDown(KeyCode.R) )
+                levelGUI.StartGameplayUI();
+           
+        }
     }
 
     public void StartRound()
     {
+        failed = false;
         onRound = true;
         
         actualLevelEnemies = levelSettings.ListToManager();
         
-        print(actualLevelEnemies.Count);
 
         foreach (var enemy in actualLevelEnemies)
         {
             enemy.gameObject.SetActive(true);
-            enemy.SpawnEnemy(levelSettings.GetEnemyRandomSpawnPosition());
+            enemy.SpawnEnemy(levelSettings.GetEnemyRandomSpawnPosition(levelSettings.actualLoops));
         }
         
         playerMov.gameObject.SetActive(true);
@@ -85,11 +94,13 @@ public class GameManager : MonoBehaviour
         
         levelShadowcreator.SetPlayerRecords(roundPlayerRecords);
         levelShadowcreator.CreateShadows();
-        playerMov.ResetToSpawn(levelSettings.GetPlayerRandomSpawnPosition());
+        playerMov.ResetToSpawn(levelSettings.GetPlayerRandomSpawnPosition(levelSettings.actualLoops));
         playerRec.ResetRecord();
         
         playerRec.BeginRound();
         roundStartTime = Time.time;
+
+        levelCamera.GlitchCameraLoop();
     }
 
     public void StoreRecordRound(List<MovementRecord> _movements, List<ShootingRecord> _shootings)
@@ -99,9 +110,8 @@ public class GameManager : MonoBehaviour
     }
 
     private void CheckForFinish()
-    
     {
-        if (Input.GetKeyDown(KeyCode.R) && levelShadowcreator.levelShadows.Count <= 0 &&  actualLevelEnemies.Count <= 0)
+        if (levelShadowcreator.levelShadows.Count <= 0 &&  actualLevelEnemies.Count <= 0)
         {
             FinishRound(true);
         }
@@ -123,7 +133,6 @@ public class GameManager : MonoBehaviour
 
     public void FinishRound(bool _win)
     {
-        
         onRound = false;
         
         levelShadowcreator.ResetShadows();
@@ -162,6 +171,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            failed = true;
+
             playerMov.gameObject.SetActive(false);
             
             levelSettings.ResetLoops();
@@ -183,8 +194,10 @@ public class GameManager : MonoBehaviour
 
     public void RemoveShadowAt(ShadowBehaviour _shadow)
     {
+        if (!onRound) return;
         levelShadowcreator.levelShadows.RemoveAt((levelShadowcreator.levelShadows.IndexOf(_shadow)));
         Destroy(_shadow.gameObject);
+
     }
 
     public void KillEnemy(Enemy enemy)

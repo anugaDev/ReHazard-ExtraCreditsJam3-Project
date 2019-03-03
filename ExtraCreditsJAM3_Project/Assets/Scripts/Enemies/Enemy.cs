@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using FSM;
 using UnityEngine;
 
-public class Enemy : FiniteStateMachine
+public class Enemy : MonoBehaviour
 {// Start is called before the first frame update
 
     public bool isAlive;

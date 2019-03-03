@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-    void Update()
+    void FixedUpdate()
     {
       
         Updatedirection();
@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Updatedirection()
     {
+        playerRb.velocity = Vector3.zero;
     
 
         var movement = Vector2.zero;

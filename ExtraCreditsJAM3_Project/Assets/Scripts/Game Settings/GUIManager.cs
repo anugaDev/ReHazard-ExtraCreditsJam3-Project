@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour
 {
-    [SerializeField] private Image fillTimerUI;
+ 
 
     [SerializeField] private Transform gameOverPanel;
     [SerializeField] private Transform gameplayPanel;
 
     [SerializeField] private Text loopsCountText;
-    
+    [SerializeField] private Text timerUI;
    
     
     // Start is called before the first frame update
@@ -23,7 +23,14 @@ public class GUIManager : MonoBehaviour
 
     public void UpdateTimeGUI(float _time, float _totalTime)
     {
-        fillTimerUI.fillAmount = _time / _totalTime;
+        var timeToUI = _totalTime - _time;
+        
+
+        timeToUI = Mathf.RoundToInt(timeToUI);
+        
+        timerUI.text = timeToUI.ToString();
+        
+        
     }
 
     public void StartGameplayUI()
