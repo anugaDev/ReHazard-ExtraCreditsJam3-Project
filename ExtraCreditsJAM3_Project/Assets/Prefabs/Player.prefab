@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 1222125870435958180}
   - component: {fileID: 1222125870435958183}
   - component: {fileID: 1222125870435958182}
+  - component: {fileID: 810021171}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -271,7 +272,6 @@ MonoBehaviour:
   leftKey: 97
   rightKey: 100
   playerRb: {fileID: 0}
-  spawnPosition: {x: 0, y: 0, z: 0}
   legs: {fileID: 1058661440}
   defaultSpeed: 200
   legsRotSpeed: 20
@@ -304,3 +304,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRecording: 1
   recordTime: 0.05
+--- !u!111 &810021171
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222125870435958185}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 033261ea48ac0a4408b6ae0556c7e8d0, type: 2}
+  - {fileID: 0}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public ShadowCreator levelShadowcreator;
 
     public List<BulletBehaviour> gameBullets = new List<BulletBehaviour>();
-    public List<Transform>  levelEnemies, actualEnemies = new List<Transform>();
+    public List<Enemy> actualLevelEnemies = new List<Enemy>();
 
     public LevelSettings levelSettings;
 
@@ -45,21 +45,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        StartCoroutine(LateStart());
+    }
+ 
+    IEnumerator LateStart()
+    {
+        yield return null;
+        
+        StartRound();
+        //Your Function You Want to Call
+    }
+
     // Update is called once per frame
     void Update()
     {
-        CheckForFinish();
+        if(onRound)
+         CheckForFinish();
     }
 
     public void StartRound()
     {
+        onRound = true;
+        
+        actualLevelEnemies = levelSettings.ListToManager();
+        
+        print(actualLevelEnemies.Count);
+
+        foreach (var enemy in actualLevelEnemies)
+        {
+            enemy.gameObject.SetActive(true);
+            enemy.SpawnEnemy(levelSettings.GetEnemyRandomSpawnPosition());
+        }
+        
         playerMov.gameObject.SetActive(true);
 
         levelSettings.actualLevelTime = 0;
         
         levelShadowcreator.SetPlayerRecords(roundPlayerRecords);
         levelShadowcreator.CreateShadows();
-        playerMov.ResetToSpawn();
+        playerMov.ResetToSpawn(levelSettings.GetPlayerRandomSpawnPosition());
         playerRec.ResetRecord();
         
         playerRec.BeginRound();
@@ -75,7 +101,7 @@ public class GameManager : MonoBehaviour
     private void CheckForFinish()
     
     {
-        if (Input.GetKeyDown(KeyCode.R) && levelShadowcreator.levelShadows.Count <= 0 &&  levelEnemies.Count <= 0)
+        if (Input.GetKeyDown(KeyCode.R) && levelShadowcreator.levelShadows.Count <= 0 &&  actualLevelEnemies.Count <= 0)
         {
             FinishRound(true);
         }
@@ -97,7 +123,24 @@ public class GameManager : MonoBehaviour
 
     public void FinishRound(bool _win)
     {
+        
+        onRound = false;
+        
         levelShadowcreator.ResetShadows();
+        
+        
+        foreach (var enemy in levelSettings.ListToManager())
+        {
+            enemy.gameObject.SetActive(false);
+         
+        }
+        
+        foreach (var bullet in gameBullets)
+        {
+            Destroy(bullet.gameObject);
+                
+        }
+        gameBullets = new List<BulletBehaviour>();
 
         
         
@@ -106,6 +149,7 @@ public class GameManager : MonoBehaviour
             levelSettings.AddEndedLoop();
             playerRec.isRecording = false;
             playerRec.RecordRound();
+            
             
             if (levelSettings.LevelHasEnded())
             {
@@ -130,12 +174,7 @@ public class GameManager : MonoBehaviour
            
         }
 
-        foreach (var bullet in gameBullets)
-        {
-            Destroy(bullet);
-                
-        }
-        gameBullets = new List<BulletBehaviour>();
+       
 
         
         
@@ -148,10 +187,11 @@ public class GameManager : MonoBehaviour
         Destroy(_shadow.gameObject);
     }
 
-    public void KillEnemy(Transform enemy)
+    public void KillEnemy(Enemy enemy)
     {
-        levelEnemies.RemoveAt(levelEnemies.IndexOf(enemy));
-        Destroy(enemy.gameObject);
+      
+        actualLevelEnemies.RemoveAt(actualLevelEnemies.IndexOf(enemy));
+        enemy.KillEnemy();
     }
 
 

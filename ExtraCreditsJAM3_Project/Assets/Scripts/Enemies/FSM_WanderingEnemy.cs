@@ -5,7 +5,7 @@ using Steerings;
 
 namespace FSM
 {
-    public class FSM_WanderingEnemy : FiniteStateMachine
+    public class FSM_WanderingEnemy : Enemy
     {
         public enum State {INITIAL, WANDER, ATTACK, DEAD}
 
@@ -96,6 +96,18 @@ namespace FSM
 
             currentState = _newState;
         }
+        public override void KillEnemy()
+        {
+            this.enabled = false;
+
+        }
+
+        public virtual void SpawnEnemy()
+        {
+            this.enabled = true;
+        }
+
     }
+   
 }
 

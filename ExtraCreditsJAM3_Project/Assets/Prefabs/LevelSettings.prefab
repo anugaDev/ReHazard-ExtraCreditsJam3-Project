@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &132806283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132806284}
+  m_Layer: 0
+  m_Name: Pointer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &132806284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132806283}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.81, y: -3.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4964238561251273019}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4964238561251273021
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +57,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.125, z: 0.0069999993}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 132806284}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43,8 +74,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7576bf0dd3504f4781cb2eb754ad1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTime: 0
+  levelTime: 10
   actualLevelTime: 0
-  loopTimes: 0
+  loopTimes: 5
   actualLoops: 0
-  playerSpawningPositions: []
+  playerSpawningPositions:
+  - {x: 0, y: 0.125, z: 0}
+  enemySpawningPositions:
+  - {x: -5.39, y: 1.875, z: 0}
+  - {x: 5.48, y: 1.875, z: 0}
+  - {x: 3.24, y: -3.825, z: 0}
+  - {x: -5.81, y: -3.665, z: 0}
+  levelEnemies:
+  - {fileID: 0}
+  positionPointer: {fileID: 132806284}

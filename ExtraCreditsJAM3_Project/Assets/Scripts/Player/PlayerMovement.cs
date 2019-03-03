@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D playerRb;
 
-    public Vector3 spawnPosition;
+  
     
     [SerializeField] private Transform legs;
 
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         actualSpeed = defaultSpeed;
         GameManager.instance.playerMov = this;
-        spawnPosition = transform.position;
+       
     }
 
     void Update()
@@ -82,10 +82,10 @@ public class PlayerMovement : MonoBehaviour
         playerRb.velocity = movement;
     }
 
-    public void ResetToSpawn()
+    public void ResetToSpawn(Vector3 newPosition)
     {
         playerRb.velocity = Vector3.zero;
-        transform.position = spawnPosition;
+        transform.position = newPosition;
     }
 
     void UpdateLegs()

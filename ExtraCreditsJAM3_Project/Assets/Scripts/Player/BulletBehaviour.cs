@@ -61,15 +61,31 @@ public class BulletBehaviour : MonoBehaviour
                     case "PlayerShadow":
 
                         GameManager.instance.RemoveShadowAt(other.GetComponent<ShadowBehaviour>());
+                        DestroyBullet();
                         
                         break;
                     
+                    case "Enemy":
+
+                        var enemy = other.GetComponent<Enemy>();
+                        if (!enemy.isAlive) return;
+                        GameManager.instance.KillEnemy(enemy);
+                        DestroyBullet();
+                        
+                      
+                        
+                        break;
+                    default:
+                        
+                        DestroyBullet();
+
+                        break;
             
                     
                 }
                 
                 
-                DestroyBullet();
+               
             }
             
         }
@@ -85,19 +101,19 @@ public class BulletBehaviour : MonoBehaviour
                     case "Player":
 
                         GameManager.instance.FinishRound(false);
+                        DestroyBullet();
                         
                         break;
                     
-                    case "PlayerBullet":
+                    default:
+                        
+                        DestroyBullet();
 
-                        //other.GetComponent<BulletBehaviour>().DestroyBullet();
-                        
                         break;
-                    
                 }
 
                
-                DestroyBullet();
+                
             }
         }
 

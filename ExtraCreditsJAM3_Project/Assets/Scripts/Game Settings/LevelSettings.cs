@@ -8,11 +8,18 @@ public class LevelSettings : MonoBehaviour
     public int loopTimes,actualLoops;
 
     [SerializeField] private List<Vector3> playerSpawningPositions = new List<Vector3>();
+    [SerializeField] private List<Vector3> enemySpawningPositions = new List<Vector3>();
+
+    [SerializeField] private List<Enemy> levelEnemies = new List<Enemy>();
+
+    [SerializeField] private Transform positionPointer;
     
     // Start is called before the first frame update
     void Start()
     {
         GameManager.instance.levelSettings = this;
+
+        GameManager.instance.actualLevelEnemies = levelEnemies;
         actualLoops = 0;
     }
 
@@ -37,8 +44,40 @@ public class LevelSettings : MonoBehaviour
         return actualLoops > loopTimes;
     }
 
-    public void SetPlayer(Transform player)
+    public Vector3  GetPlayerRandomSpawnPosition()
     {
-        player.position = playerSpawningPositions[Random.Range(0,playerSpawningPositions.Count - 1)];
+        return playerSpawningPositions[Random.Range(0,playerSpawningPositions.Count - 1)];
+    }
+    public Vector3  GetEnemyRandomSpawnPosition()
+    {
+        var position = enemySpawningPositions[Random.Range(0,enemySpawningPositions.Count - 1)];
+        
+        print(position);
+        
+        return position;
+    }
+
+    public void FetchEnemies()
+    {
+        levelEnemies = new List<Enemy>();
+        foreach (Enemy e in FindObjectsOfType<Enemy>())
+        {
+            levelEnemies.Add(e);
+            
+        }
+    }
+
+    public List<Enemy>  ListToManager()
+    {
+        return new List<Enemy>(levelEnemies);
+    }
+
+    public void AddPositionPointerToSpawn()
+    {
+        playerSpawningPositions.Add(positionPointer.position);
+    }
+    public void AddPositionPointerToEnemyPositions()
+    {
+        enemySpawningPositions.Add(positionPointer.position);
     }
 }
