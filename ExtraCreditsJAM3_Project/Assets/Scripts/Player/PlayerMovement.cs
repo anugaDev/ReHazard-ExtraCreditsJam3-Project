@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform legs;
 
     [SerializeField] private float
-        defaultSpeed;
+        defaultSpeed,
+        legsRotSpeed
+        ;
     
     [HideInInspector] public float 
         actualSpeed
@@ -97,8 +99,9 @@ public class PlayerMovement : MonoBehaviour
         {
             legs.gameObject.SetActive(false);
         }
-        var rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        legs.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        var q = Quaternion.AngleAxis(angle, Vector3.forward);
+        legs.transform.rotation = Quaternion.Slerp(legs.transform.rotation, q, Time.fixedDeltaTime * legsRotSpeed );
     }
 
     public void SetLegs(bool _state)

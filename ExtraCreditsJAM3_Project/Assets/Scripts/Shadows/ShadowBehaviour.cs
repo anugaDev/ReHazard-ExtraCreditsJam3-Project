@@ -19,7 +19,8 @@ public class ShadowBehaviour : MonoBehaviour
         ;
 
     private float timeForPosChange = 0;
-    
+
+    [SerializeField] private Transform legs;
 
     [HideInInspector] public RoundRecordContainer shadowActionsRecord;
 
@@ -81,25 +82,37 @@ public class ShadowBehaviour : MonoBehaviour
         var direction = actualPositionTarget.position - transform.position;
         direction.Normalize();
         
-        
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        var q = Quaternion.AngleAxis(angle, Vector3.forward);
+        legs.transform.rotation = Quaternion.Slerp(legs.transform.rotation, q, Time.fixedDeltaTime * shadowRotSpeed);
         
         if ((actualPositionTarget.position - transform.position).magnitude > inPositionRadius)
         {
             shadowRb.velocity = direction * shadowSpeed * Time.fixedDeltaTime;
+            legs.gameObject.SetActive(true);
         }
         else
         {
             shadowRb.velocity = Vector3.zero;
+            legs.gameObject.SetActive(false);
         }
+        
+        
        
         
     }
 
+
     private void UpdateRotation()
     {
-      
-        var rotationZ = Mathf.Atan2(actualPositionTarget.direction.y, actualPositionTarget.direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+//        Debug.DrawRay(transform.position, actualPositionTarget.direction, Color.green);
+        var angle = Mathf.Atan2(actualPositionTarget.direction.y, actualPositionTarget.direction.x) * Mathf.Rad2Deg;
+        var q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.fixedDeltaTime * shadowRotSpeed);
+
+//        var rotationZ = Mathf.Atan2(actualPositionTarget.direction.y, actualPositionTarget.direction.x) * Mathf.Rad2Deg;
+//        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        
         
        
 
@@ -207,7 +220,8 @@ public class ShadowBehaviour : MonoBehaviour
 
     IEnumerator WaitTime(float _waitTime)
     {
-       
+        legs.gameObject.SetActive(false);
+
         isMoving = false;
         yield return new WaitForSeconds(_waitTime);
         isMoving = true;
