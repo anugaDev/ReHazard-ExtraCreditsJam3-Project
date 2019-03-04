@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Updatedirection()
     {
+        playerRb.angularVelocity = 0;
         playerRb.velocity = Vector3.zero;
     
 
@@ -117,6 +118,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        print("coliding");
+        Vector2 position = transform.position;
+        
+        var point= other.gameObject.GetComponent<Collider2D>().bounds.ClosestPoint(transform.position);
 
+        
+        Vector3 dir = point - transform.position ;
+        var magnitude = dir.magnitude;
+        // We then get the opposite (-Vector3) and normalize it
+        dir = -dir.normalized;
+//         And finally we add force in the direction of dir and multiply it by force. 
+//         This will push back the player
+        playerRb.AddForce(dir*magnitude);
+    }
+
+//    private void OnCollisionEnter2D(Collision2D other)
+//    {  print("coliding");
+//        Vector2 position = transform.position;
+//        
+//    }
 }

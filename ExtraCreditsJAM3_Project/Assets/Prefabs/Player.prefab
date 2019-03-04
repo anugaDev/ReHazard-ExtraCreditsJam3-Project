@@ -110,12 +110,12 @@ GameObject:
   - component: {fileID: 1222125870435958179}
   - component: {fileID: 1222125870435958178}
   - component: {fileID: 1222125870435958181}
-  - component: {fileID: 1222125870435958176}
   - component: {fileID: 1222125870435958177}
   - component: {fileID: 1222125870435958180}
   - component: {fileID: 1222125870435958183}
   - component: {fileID: 1222125870435958182}
   - component: {fileID: 1938663643}
+  - component: {fileID: 4709595470900132102}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -172,8 +172,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 395309097
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 860aca563cc607149b2dc8965c115959, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -198,41 +198,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
+  m_Mass: 100
+  m_LinearDrag: 2
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 97b89b891b2ac614bbd866c77736b0d2, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &1222125870435958176
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222125870435958185}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.12}
-  m_SpriteTilingProperty:
-    border: {x: 0.75, y: 0.1875, z: 0.0625, w: 0.1875}
-    pivot: {x: 0.515625, y: 0.375}
-    oldSize: {x: 2, y: 1}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.71, y: 0.69}
-  m_EdgeRadius: 0
 --- !u!114 &1222125870435958177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,3 +297,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &4709595470900132102
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222125870435958185}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.125}
+  serializedVersion: 2
+  m_Radius: 0.34
