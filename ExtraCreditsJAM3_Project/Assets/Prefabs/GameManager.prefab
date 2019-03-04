@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99acd77a9b28c04797071e82462cbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenTransitions: 0.5
+  timeBetweenTransitions: 0.25
   roundStartTime: 0
   playerMov: {fileID: 0}
   playerRec: {fileID: 0}
@@ -61,6 +61,7 @@ MonoBehaviour:
   onRound: 0
   failed: 0
   first: 0
+  loading: 0
   effectsToDestroy: []
 --- !u!114 &8611564777471175375
 MonoBehaviour:
