@@ -32,7 +32,10 @@ public class PlayerMovement : MonoBehaviour
         actualSpeed
         ;
 
+    [SerializeField] private AudioClip deathClip;
+
     private Vector2 direction;
+    private GameObject myDeath;
         
     void Start()
     {
@@ -94,16 +97,22 @@ public class PlayerMovement : MonoBehaviour
         transform.position = newPosition;
     }
 
-    public void PlayerDeath()
+    public void Respawn()
     {
-        gameObject.SetActive(false);
-        GameManager.instance.effectsToDestroy.Add(Instantiate(playerDeath.gameObject, transform.position, transform.rotation).transform); 
+        gameObject.SetActive(true);
+        if(myDeath != null) Destroy(myDeath);
     }
 
-    public void PlayerPassLevel()
+    public void PlayerDeath()
     {
         
+        gameObject.SetActive(false);
+     
+        
+        myDeath = Instantiate(playerDeath.gameObject, transform.position, transform.rotation);
+        GameManager.instance.effectsToDestroy.Add(myDeath.transform); 
     }
+
 
     void UpdateLegs()
     {

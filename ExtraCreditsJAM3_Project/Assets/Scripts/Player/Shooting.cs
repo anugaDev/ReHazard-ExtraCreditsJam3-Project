@@ -17,6 +17,9 @@ public class Shooting : MonoBehaviour
         shootingOffset
         ;
 
+    private AudioSource playerShootSource;
+    [SerializeField] private AudioClip shootingPlayer;
+
     private Animator animator;
 
     private void OnEnable()
@@ -26,6 +29,7 @@ public class Shooting : MonoBehaviour
 
     void Start()
     {
+        playerShootSource = GetComponent<AudioSource>();
         gameCamera = gameCamera == null ? Camera.main : gameCamera;
         
         isReloaded = true;
@@ -46,6 +50,8 @@ public class Shooting : MonoBehaviour
     public void Shoot()
     {
         animator.SetTrigger("Shoot");
+        playerShootSource.clip = shootingPlayer;
+        playerShootSource.Play();
 
         var bullet = Instantiate(bulletPrefab, transform.position + (GetForwardDir() * shootingOffset), transform.rotation);
         var bulletBehaviour = bullet.GetComponent<BulletBehaviour>();

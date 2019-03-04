@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public LevelSettings levelSettings;
 
     public GUIManager levelGUI;
+    public SoundStateManager soundManager;
 
     public bool onRound, failed, first;
     [HideInInspector]public List<Transform> effectsToDestroy = new List<Transform>();
@@ -90,8 +91,8 @@ public class GameManager : MonoBehaviour
             enemy.gameObject.SetActive(true);
             enemy.SpawnEnemy(levelSettings.GetEnemyRandomSpawnPosition(levelSettings.actualLoops));
         }
-        
-        playerMov.gameObject.SetActive(true);
+
+        playerMov.Respawn();
 
         levelSettings.actualLevelTime = 0;
         
@@ -181,6 +182,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            soundManager.PlayDeath();
+            
             levelCamera.EndLevelAnimationCamera();
 
             failed = true;
