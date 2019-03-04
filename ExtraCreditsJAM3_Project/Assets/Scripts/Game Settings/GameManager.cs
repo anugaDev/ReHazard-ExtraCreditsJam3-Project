@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private float timeBetweenTransitions;
     public static GameManager instance;
 
     [HideInInspector] public float roundStartTime;
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     public GUIManager levelGUI;
     public SoundStateManager soundManager;
 
-    public bool onRound, failed, first;
+    public bool onRound, failed, first ,loading;
     [HideInInspector]public List<Transform> effectsToDestroy = new List<Transform>();
     
     // Start is called before the first frame update
@@ -118,9 +119,9 @@ public class GameManager : MonoBehaviour
 
     private void CheckForFinish()
     {
-        if (levelShadowcreator.levelShadows.Count <= 0 &&  actualLevelEnemies.Count <= 0)
+        if (levelShadowcreator.levelShadows.Count <= 0 &&  actualLevelEnemies.Count <= 0 && !loading)
         {
-            FinishRound(true);
+            StartCoroutine(ExecuteLateFinish(true));
         }
         else if (levelSettings.actualLevelTime > levelSettings.levelTime)
         {
@@ -136,6 +137,15 @@ public class GameManager : MonoBehaviour
             
         }
         
+    }
+
+    IEnumerator ExecuteLateFinish(bool condition)
+    {
+        loading = true;
+        yield return new WaitForSeconds(timeBetweenTransitions);
+        loading = false;
+        FinishRound(condition);
+            
     }
 
     public void FinishRound(bool _win)
