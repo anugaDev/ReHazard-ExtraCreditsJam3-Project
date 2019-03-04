@@ -264,6 +264,7 @@ public class ShadowBehaviour : MonoBehaviour
 
     public void DestroyShadow()
     {
+        if(affordanceInstance!= null) Destroy(affordanceInstance.gameObject);
         GameManager.instance.effectsToDestroy.Add(Instantiate(deathShadowParticle, transform.position, transform.rotation)); ;
     }
 }
