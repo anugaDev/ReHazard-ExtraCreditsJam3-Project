@@ -2754,7 +2754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &645931273
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2811,7 +2811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645931272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4350,7 +4350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1772952762
 Transform:
   m_ObjectHideFlags: 0
@@ -4359,7 +4359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772952761}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalPosition: {x: 7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4977,12 +4977,12 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: enemySpawningPositions.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4992,7 +4992,7 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: loopTimes
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -5112,22 +5112,22 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.data[7].x
-      value: -4.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.data[7].y
-      value: -0.505
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.data[8].x
-      value: -4.08
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.data[8].y
-      value: -0.505
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -5468,6 +5468,16 @@ PrefabInstance:
         type: 3}
       propertyPath: enemySpawningPositions.Array.data[6].x
       value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: enemySpawningPositions.Array.data[7].y
+      value: -5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: enemySpawningPositions.Array.data[8].x
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 132806284, guid: b6c04bc6f6dd652439f39e12b7e8e4b9, type: 3}
       propertyPath: m_LocalPosition.y
