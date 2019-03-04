@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviour
 
             failed = true;
 
-            playerMov.gameObject.SetActive(false);
+            playerMov.PlayerDeath();
             
             levelSettings.ResetLoops();
             

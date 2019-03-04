@@ -17,7 +17,11 @@ public class PlayerMovement : MonoBehaviour
 
   
     
-    [SerializeField] private Transform legs;
+    [SerializeField] private Transform 
+        legs,
+        playerDeath,
+        playerSuccess
+        ;
 
     [SerializeField] private float
         defaultSpeed,
@@ -88,6 +92,17 @@ public class PlayerMovement : MonoBehaviour
     {
         playerRb.velocity = Vector3.zero;
         transform.position = newPosition;
+    }
+
+    public void PlayerDeath()
+    {
+        gameObject.SetActive(false);
+        GameManager.instance.effectsToDestroy.Add(Instantiate(playerDeath.gameObject, transform.position, transform.rotation).transform); 
+    }
+
+    public void PlayerPassLevel()
+    {
+        
     }
 
     void UpdateLegs()

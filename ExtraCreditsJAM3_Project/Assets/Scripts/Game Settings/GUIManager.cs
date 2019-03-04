@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour
 {
- 
 
+
+    [SerializeField] private float timeOnBlack;
+    [SerializeField] private Transform blackPanel;
     [SerializeField] private Transform gameOverPanel;
     [SerializeField] private Transform winPanel;
     [SerializeField] private Transform gameplayPanel;
@@ -36,6 +39,7 @@ public class GUIManager : MonoBehaviour
 
     public void StartGameplayUI()
     {
+        blackPanel.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
         gameplayPanel.gameObject.SetActive(true);
         
@@ -45,8 +49,10 @@ public class GUIManager : MonoBehaviour
 
     public void GameOverUI()
     {
-        gameOverPanel.gameObject.SetActive(true);
+   
         gameplayPanel.gameObject.SetActive(false);
+
+        StartCoroutine(WaitOnBlack(timeOnBlack));
     }
 
     public void GameSuccessUI()
@@ -63,5 +69,13 @@ public class GUIManager : MonoBehaviour
     public void NextLevelUI()
     {
         GameManager.instance.ChangeToNextLevel();
+    }
+
+    IEnumerator WaitOnBlack(float _time)
+    {
+        blackPanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(_time);
+        
+        gameOverPanel.gameObject.SetActive(true);
     }
 }
