@@ -15,7 +15,8 @@ public class ShadowBehaviour : MonoBehaviour
         loopPauseTime,
         bulletSpeed,
         bulletOffset,
-        timeBetweenChangingPositions
+        timeBetweenChangingPositions,
+        windUpTime
         ;
 
     private float timeForPosChange = 0;
@@ -27,12 +28,16 @@ public class ShadowBehaviour : MonoBehaviour
     private MovementRecord actualPositionTarget;
     private ShootingRecord actualInQeueAction;
 
+
+    private Animator shadowAnimator;
+    
     private Rigidbody2D shadowRb;
-    private bool isMoving = false, allActionsMade, allPositionsMade;
+    private bool isMoving = false, allActionsMade, allPositionsMade, windingUp;
     
     // Start is called before the first frame update
     void Start()
     {
+        shadowAnimator = GetComponent<Animator>();
         shadowRb = GetComponent<Rigidbody2D>();
     }
 
@@ -138,14 +143,26 @@ public class ShadowBehaviour : MonoBehaviour
     }
     private void CheckForShooting()
     {
+        shadowAnimator.ResetTrigger("WindUp");
+        shadowAnimator.ResetTrigger("Shoot");
         var actualTime = Time.time;
 
+        if ((actualTime - startMovingTime) >= (actualInQeueAction.instant - windUpTime)  && !windingUp )
+        {
+            print("WINDUP");
+            windingUp = true;
+            shadowAnimator.SetTrigger("WindUp");
+        }
        
         if (!allActionsMade)
         {
             if ((actualTime - startMovingTime) >= actualInQeueAction.instant)
             {
                 ShadowShoot();
+                
+                
+                
+                
 
             }
         }
@@ -171,6 +188,8 @@ public class ShadowBehaviour : MonoBehaviour
 
     private void ShadowShoot()
     {
+         shadowAnimator.SetTrigger("Shoot");
+         windingUp = false;
         var rotationZ = Mathf.Atan2(actualInQeueAction.shootingDir.y, actualInQeueAction.shootingDir.x) * Mathf.Rad2Deg;
         Vector3 direction = actualInQeueAction.shootingDir;
         var bullet = Instantiate(bulletPrefab, transform.position + (direction * bulletOffset) , Quaternion.Euler(0.0f, 0.0f, rotationZ)).GetComponent<BulletBehaviour>();
@@ -209,6 +228,8 @@ public class ShadowBehaviour : MonoBehaviour
 
         shadowRb.velocity = Vector3.zero;
         
+        shadowAnimator.ResetTrigger("StartLoop");
+        shadowAnimator.SetTrigger("EndLoop");
         StartCoroutine (WaitTime(loopPauseTime));
 
         allPositionsMade = false;
@@ -221,11 +242,15 @@ public class ShadowBehaviour : MonoBehaviour
 
         isMoving = false;
         yield return new WaitForSeconds(_waitTime);
+        
+        shadowAnimator.SetTrigger("StartLoop");
         isMoving = true;
         startMovingTime = Time.time;
         
         transform.position = actualPositionTarget.position;
-       
+
+        windingUp = false;
+        
         timeForPosChange = 0;
     }
 }

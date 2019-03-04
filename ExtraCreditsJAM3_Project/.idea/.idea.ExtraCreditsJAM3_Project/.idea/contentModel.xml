@@ -46,6 +46,7 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="CameraActions.cs" t="Include" />
+          <e p="DestroySelfAnimation.cs" t="Include" />
           <e p="Enemies" t="Include">
             <e p="Enemy.cs" t="Include" />
             <e p="EnemyBlackboard.cs" t="Include" />

@@ -271,4 +271,5 @@ MonoBehaviour:
   bulletSpeed: 500
   bulletOffset: 1.2
   timeBetweenChangingPositions: 0
+  windUpTime: 0.14
   legs: {fileID: 1892241137}
