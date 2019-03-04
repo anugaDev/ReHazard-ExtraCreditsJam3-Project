@@ -45,6 +45,10 @@
               </e>
             </e>
           </e>
+          <e p="UnityScanlinesEffect-master" t="Include">
+            <e p="ScanlinesEffect.cs" t="Include" />
+            <e p="ScanlinesEffect.shader" t="Include" />
+          </e>
         </e>
         <e p="Scripts" t="Include">
           <e p="CameraActions.cs" t="Include" />

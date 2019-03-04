@@ -74,7 +74,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.postprocessing@2.1.4/PostProcessing/Runtime/PostProcessLayer.cs">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -106,6 +106,23 @@
                 <marker date="1551726042102" expanded="true" signature="2882:3447" ph="{...}" />
                 <marker date="1551726042102" expanded="true" signature="3271:3399" ph="/* And finally we add force in the direction of dir and multiply it by force. ... */" />
                 <marker date="1551726042102" expanded="true" signature="3449:3601" ph="/* private void OnCollisionEnter2D(Collision2D other) ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Enemies/StaticEnemy.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+              <folding>
+                <marker date="1551733796192" expanded="true" signature="6:78" ph="..." />
+                <marker date="1551733796192" expanded="true" signature="112:803" ph="{...}" />
+                <marker date="1551733796192" expanded="true" signature="290:404" ph="{...}" />
+                <marker date="1551733796192" expanded="true" signature="462:550" ph="{...}" />
+                <marker date="1551733796192" expanded="true" signature="587:671" ph="{...}" />
+                <marker date="1551733796192" expanded="true" signature="709:801" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -214,22 +231,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/DestroyAfterAnim.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
-              <folding>
-                <marker date="1551705335351" expanded="false" signature="6:78" ph="..." />
-                <marker date="1551705335351" expanded="true" signature="133:1504" ph="{...}" />
-                <marker date="1551705335351" expanded="true" signature="140:841" ph="/* OnStateEnter is called when a transition starts and the state machine starts to evaluate this state ... */" />
-                <marker date="1551705335351" expanded="true" signature="942:992" ph="{...}" />
-                <marker date="1551705335351" expanded="true" signature="998:1502" ph="/* OnStateMove is called right after Animator.OnAnimatorMove() ... */" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Shadows/ShadowCreator.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="386">
@@ -331,7 +332,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game Settings/Editor/LevelSettings_Editor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Enemies/Enemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game Settings/LevelSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Enemies/StaticEnemy.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CameraActions.cs" />
         <option value="$PROJECT_DIR$/Assets/DeactivateAfterAnim.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/BulletBehaviour.cs" />
@@ -343,10 +343,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Game Settings/GUIManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Shadows/ShadowBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game Settings/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Enemies/StaticEnemy.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="610" />
     <option name="y" value="-15" />
     <option name="width" value="974" />
@@ -473,7 +474,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102102000" />
+    <option name="totallyTimeSpent" value="102137000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -485,7 +486,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13059701" />
@@ -741,21 +742,6 @@
             <marker date="1551665582332" expanded="true" signature="676:939" ph="{...}" />
             <marker date="1551665582332" expanded="true" signature="773:932" ph="/* playing = true; ... */" />
             <marker date="1551665582332" expanded="true" signature="982:1077" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Enemies/StaticEnemy.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-          <folding>
-            <marker date="1551708375303" expanded="false" signature="6:78" ph="..." />
-            <marker date="1551708375303" expanded="true" signature="112:696" ph="{...}" />
-            <marker date="1551708375303" expanded="true" signature="253:316" ph="{...}" />
-            <marker date="1551708375303" expanded="true" signature="374:462" ph="{...}" />
-            <marker date="1551708375303" expanded="true" signature="499:564" ph="{...}" />
-            <marker date="1551708375303" expanded="true" signature="602:694" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1017,6 +1003,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.postprocessing@2.1.4/PostProcessing/Runtime/PostProcessLayer.cs">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Enemies/StaticEnemy.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding>
+            <marker date="1551733796192" expanded="true" signature="6:78" ph="..." />
+            <marker date="1551733796192" expanded="true" signature="112:803" ph="{...}" />
+            <marker date="1551733796192" expanded="true" signature="290:404" ph="{...}" />
+            <marker date="1551733796192" expanded="true" signature="462:550" ph="{...}" />
+            <marker date="1551733796192" expanded="true" signature="587:671" ph="{...}" />
+            <marker date="1551733796192" expanded="true" signature="709:801" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

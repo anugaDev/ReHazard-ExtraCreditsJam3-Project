@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class StaticEnemy : Enemy
 {
+    private AudioSource targetSouce;
     private Animator targetAnimator;
     public float rotationSpeed;
     // Start is called before the first frame update
     void Start()
     {
+        targetSouce = GetComponent<AudioSource>();
         targetAnimator = GetComponent<Animator>();
     }
 
@@ -19,7 +21,7 @@ public class StaticEnemy : Enemy
     }
     public override void KillEnemy()
     {
-        
+        targetSouce.Play();
         targetAnimator.SetTrigger("dead");
 
     }
