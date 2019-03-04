@@ -230,7 +230,7 @@ MonoBehaviour:
   bulletSpeed: 500
   timeBetweenShoots: 0.5
   shootingOffset: 1
-  shootingPlayer: {fileID: 8300000, guid: 79889085a09e2f14baf69bf8153b6d09, type: 3}
+  shootingPlayer: {fileID: 8300000, guid: 76b0cf08838c28944b022444b57af30c, type: 3}
 --- !u!114 &1222125870435958180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   defaultSpeed: 200
   legsRotSpeed: 20
   actualSpeed: 0
-  deathClip: {fileID: 8300000, guid: d0b6ad92cff0c504493b8b937dd3e424, type: 3}
+  deathClip: {fileID: 0}
 --- !u!114 &1222125870435958183
 MonoBehaviour:
   m_ObjectHideFlags: 0

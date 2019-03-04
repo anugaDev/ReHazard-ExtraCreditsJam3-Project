@@ -80,6 +80,9 @@ public class GameManager : MonoBehaviour
 
     public void StartRound()
     {
+        soundManager.LoopEffect();
+
+        
         failed = false;
         onRound = true;
         

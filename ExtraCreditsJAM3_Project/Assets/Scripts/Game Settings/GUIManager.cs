@@ -51,7 +51,9 @@ public class GUIManager : MonoBehaviour
 
     public void GameOverUI()
     {
-   
+
+        alreadyPlaying = false;
+        
         gameplayPanel.gameObject.SetActive(false);
 
         StartCoroutine(WaitOnBlack(timeOnBlack));
