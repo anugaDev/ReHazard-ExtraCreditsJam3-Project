@@ -86,4 +86,9 @@ public class GUIManager : MonoBehaviour
 
         }
     }
+
+    public void QuitGUI()
+    {
+        GameManager.instance.QuitGame();
+    }
 }

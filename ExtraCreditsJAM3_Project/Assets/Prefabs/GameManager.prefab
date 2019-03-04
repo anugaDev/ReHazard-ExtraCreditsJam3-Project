@@ -284,4 +284,5 @@ MonoBehaviour:
   ambiencePlayer: {fileID: 8611564777471175372}
   deathEffect: {fileID: 8300000, guid: 5b52513ac0a25b6419c00bfdd8555eae, type: 3}
   loopEffect: {fileID: 8300000, guid: 38ebb5ac6267e554d89c774990e772f5, type: 3}
-  levelCompletedEffect: {fileID: 0}
+  levelCompletedEffect: {fileID: 8300000, guid: 00d4f3c4a80e86f43816a78242b994ff,
+    type: 3}

@@ -29,6 +29,9 @@ public class ShadowBehaviour : MonoBehaviour
     private ShootingRecord actualInQeueAction;
 
 
+    private AudioSource shadowSource;
+    [SerializeField] private AudioClip shadowShootClip;
+        
     [SerializeField] private Transform resetAffordance, deathShadowParticle;
     [HideInInspector] public Transform affordanceInstance;
     private Animator shadowAnimator;
@@ -39,6 +42,7 @@ public class ShadowBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shadowSource = GetComponent<AudioSource>();
         shadowAnimator = GetComponent<Animator>();
         shadowRb = GetComponent<Rigidbody2D>();
     }
@@ -190,6 +194,8 @@ public class ShadowBehaviour : MonoBehaviour
 
     private void ShadowShoot()
     {
+        shadowSource.clip = shadowShootClip;
+        shadowSource.Play();
          shadowAnimator.SetTrigger("Shoot");
          windingUp = false;
         var rotationZ = Mathf.Atan2(actualInQeueAction.shootingDir.y, actualInQeueAction.shootingDir.x) * Mathf.Rad2Deg;

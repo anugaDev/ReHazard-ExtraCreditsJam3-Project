@@ -174,6 +174,7 @@ public class GameManager : MonoBehaviour
             
             if (levelSettings.LevelHasEnded())
             {
+                soundManager.PlayLevelCompleted();
                 playerMov.gameObject.SetActive(false);
                 levelCamera.EndLevelAnimationCamera();
                 levelGUI.GameSuccessUI();
@@ -243,6 +244,11 @@ public class GameManager : MonoBehaviour
         
         
         StartCoroutine(LateStart());
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 
