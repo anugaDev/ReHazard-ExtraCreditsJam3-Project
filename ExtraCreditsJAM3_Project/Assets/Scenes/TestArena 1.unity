@@ -2537,12 +2537,12 @@ PrefabInstance:
     - target: {fileID: 6685182642253507533, guid: 225e9dee71570a6409b8d7eba5e14d45,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.5
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6685182642253507533, guid: 225e9dee71570a6409b8d7eba5e14d45,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6685182642253507533, guid: 225e9dee71570a6409b8d7eba5e14d45,
         type: 3}
@@ -3712,12 +3712,12 @@ PrefabInstance:
     - target: {fileID: 890099692114281302, guid: e804155cc0ea7314e9ef6083f3dd30cc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 890099692114281302, guid: e804155cc0ea7314e9ef6083f3dd30cc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 890099692114281302, guid: e804155cc0ea7314e9ef6083f3dd30cc,
         type: 3}
@@ -4528,12 +4528,12 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: enemySpawningPositions.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4543,7 +4543,7 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: loopTimes
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4638,7 +4638,7 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: enemySpawningPositions.Array.data[4].x
-      value: -3.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4648,12 +4648,12 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.data[4].x
-      value: 5
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.data[4].y
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4674,6 +4674,26 @@ PrefabInstance:
         type: 3}
       propertyPath: enemySpawningPositions.Array.data[5].y
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: playerSpawningPositions.Array.data[6].x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: playerSpawningPositions.Array.data[6].y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: enemySpawningPositions.Array.data[6].x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: enemySpawningPositions.Array.data[6].y
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 132806284, guid: b6c04bc6f6dd652439f39e12b7e8e4b9, type: 3}
       propertyPath: m_LocalPosition.y
