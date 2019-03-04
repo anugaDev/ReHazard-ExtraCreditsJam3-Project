@@ -2518,11 +2518,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!4 &188723727 stripped
+--- !u!4 &356479346 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6685182642253507533, guid: 225e9dee71570a6409b8d7eba5e14d45,
+  m_CorrespondingSourceObject: {fileID: 890099692114281302, guid: e804155cc0ea7314e9ef6083f3dd30cc,
     type: 3}
-  m_PrefabInstance: {fileID: 1817238683}
+  m_PrefabInstance: {fileID: 2081371294}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &618436719
 GameObject:
@@ -3283,6 +3283,7 @@ MonoBehaviour:
   onRound: 0
   failed: 0
   first: 0
+  effectsToDestroy: []
 --- !u!4 &904900572
 Transform:
   m_ObjectHideFlags: 0
@@ -3432,7 +3433,7 @@ PrefabInstance:
     - target: {fileID: 6685182642253507533, guid: 225e9dee71570a6409b8d7eba5e14d45,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6685182642253507533, guid: 225e9dee71570a6409b8d7eba5e14d45,
         type: 3}
@@ -3506,7 +3507,7 @@ PrefabInstance:
     - target: {fileID: 890099692114281302, guid: e804155cc0ea7314e9ef6083f3dd30cc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 890099692114281302, guid: e804155cc0ea7314e9ef6083f3dd30cc,
         type: 3}
@@ -4194,12 +4195,12 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: enemySpawningPositions.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4209,17 +4210,17 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: loopTimes
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: positionPointer
       value: 
-      objectReference: {fileID: 188723727}
+      objectReference: {fileID: 356479346}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: playerSpawningPositions.Array.data[0].y
-      value: -3
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4229,7 +4230,7 @@ PrefabInstance:
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
       propertyPath: enemySpawningPositions.Array.data[0].y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
         type: 3}
@@ -4270,6 +4271,31 @@ PrefabInstance:
         type: 3}
       propertyPath: enemySpawningPositions.Array.data[2].y
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: playerSpawningPositions.Array.data[0].x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: enemySpawningPositions.Array.data[3].x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: enemySpawningPositions.Array.data[3].y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: playerSpawningPositions.Array.data[3].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964238561251273020, guid: b6c04bc6f6dd652439f39e12b7e8e4b9,
+        type: 3}
+      propertyPath: playerSpawningPositions.Array.data[3].y
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6c04bc6f6dd652439f39e12b7e8e4b9, type: 3}
