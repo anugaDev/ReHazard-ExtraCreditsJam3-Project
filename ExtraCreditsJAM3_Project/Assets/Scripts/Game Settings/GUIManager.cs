@@ -14,8 +14,9 @@ public class GUIManager : MonoBehaviour
 
     [SerializeField] private Text loopsCountText;
     [SerializeField] private Text timerUI;
-   
-    
+
+
+    private bool alreadyPlaying;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class GUIManager : MonoBehaviour
 
     public void StartGameplayUI()
     {
+        alreadyPlaying = true;
         blackPanel.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
         gameplayPanel.gameObject.SetActive(true);
@@ -75,7 +77,11 @@ public class GUIManager : MonoBehaviour
     {
         blackPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(_time);
-        
-        gameOverPanel.gameObject.SetActive(true);
+
+        if (!alreadyPlaying)
+        {
+            gameOverPanel.gameObject.SetActive(true);
+
+        }
     }
 }
