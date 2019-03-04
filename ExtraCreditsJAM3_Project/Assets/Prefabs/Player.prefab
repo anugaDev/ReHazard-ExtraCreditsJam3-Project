@@ -247,6 +247,9 @@ MonoBehaviour:
   rightKey: 100
   playerRb: {fileID: 0}
   legs: {fileID: 1058661440}
+  playerDeath: {fileID: 8497173020852499609, guid: f10cdcabaa42f9647b26c0f2c92925ef,
+    type: 3}
+  playerSuccess: {fileID: 0}
   defaultSpeed: 200
   legsRotSpeed: 20
   actualSpeed: 0
