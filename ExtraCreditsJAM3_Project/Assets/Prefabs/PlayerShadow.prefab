@@ -277,6 +277,8 @@ MonoBehaviour:
   legs: {fileID: 1892241137}
   resetAffordance: {fileID: 1297541433676991453, guid: a4a7095b1b145114db5034ca39a87474,
     type: 3}
+  deathShadowParticle: {fileID: 5397694577369384946, guid: ce290c79353386849b653ce68d9c4d09,
+    type: 3}
   affordanceInstance: {fileID: 0}
 --- !u!58 &8167845287985681426
 CircleCollider2D:

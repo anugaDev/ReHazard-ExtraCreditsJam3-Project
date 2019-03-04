@@ -3406,6 +3406,7 @@ MonoBehaviour:
   onRound: 0
   failed: 0
   first: 0
+  effectsToDestroy: []
 --- !u!4 &904900572
 Transform:
   m_ObjectHideFlags: 0

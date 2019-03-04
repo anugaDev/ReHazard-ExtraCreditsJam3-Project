@@ -124,7 +124,7 @@ public class BulletBehaviour : MonoBehaviour
     }
     public void DestroyBullet()
     {
-        Instantiate(bulletDestroyParticle, transform.position, Quaternion.identity);
+       GameManager.instance.effectsToDestroy.Add(Instantiate(bulletDestroyParticle, transform.position, Quaternion.identity));
         var index = GameManager.instance.gameBullets.IndexOf(this);
 
 //        print(index);

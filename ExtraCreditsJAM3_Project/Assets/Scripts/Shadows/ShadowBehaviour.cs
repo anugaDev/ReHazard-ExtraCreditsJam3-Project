@@ -29,7 +29,7 @@ public class ShadowBehaviour : MonoBehaviour
     private ShootingRecord actualInQeueAction;
 
 
-    [SerializeField] private Transform resetAffordance;
+    [SerializeField] private Transform resetAffordance, deathShadowParticle;
     [HideInInspector] public Transform affordanceInstance;
     private Animator shadowAnimator;
     
@@ -232,6 +232,8 @@ public class ShadowBehaviour : MonoBehaviour
 
         affordanceInstance = Instantiate(resetAffordance, actualPositionTarget.position, Quaternion.identity);
         
+        GameManager.instance.effectsToDestroy.Add(affordanceInstance);
+        
         shadowAnimator.ResetTrigger("StartLoop");
         shadowAnimator.SetTrigger("EndLoop");
         StartCoroutine (WaitTime(loopPauseTime));
@@ -253,10 +255,15 @@ public class ShadowBehaviour : MonoBehaviour
         
         transform.position = actualPositionTarget.position;
 
-        if(affordanceInstance != null) DestroyImmediate((affordanceInstance.gameObject));
+        if(affordanceInstance != null) Destroy((affordanceInstance.gameObject));
         
         windingUp = false;
         
         timeForPosChange = 0;
+    }
+
+    public void DestroyShadow()
+    {
+        GameManager.instance.effectsToDestroy.Add(Instantiate(deathShadowParticle, transform.position, transform.rotation)); ;
     }
 }

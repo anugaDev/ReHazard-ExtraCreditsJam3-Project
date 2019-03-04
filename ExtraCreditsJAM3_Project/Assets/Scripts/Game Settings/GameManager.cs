@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public GUIManager levelGUI;
 
     public bool onRound, failed, first;
+    [HideInInspector]public List<Transform> effectsToDestroy = new List<Transform>();
     
     // Start is called before the first frame update
     void Awake()
@@ -138,7 +139,12 @@ public class GameManager : MonoBehaviour
         onRound = false;
         
         levelShadowcreator.ResetShadows();
-        
+
+        foreach (var effect in effectsToDestroy)
+        {
+        if(effect != null) Destroy(effect.gameObject);
+            
+        }
         
         foreach (var enemy in levelSettings.ListToManager())
         {
@@ -202,6 +208,7 @@ public class GameManager : MonoBehaviour
     {
         if (!onRound) return;
         levelShadowcreator.levelShadows.RemoveAt((levelShadowcreator.levelShadows.IndexOf(_shadow)));
+        _shadow.DestroyShadow();
         Destroy(_shadow.gameObject);
 
     }
