@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void StartRound()
     {
-        soundManager.LoopEffect();
+        
 
         
         failed = false;
@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
         playerRec.BeginRound();
         roundStartTime = Time.time;
 
+        soundManager.LoopEffect();
         levelCamera.GlitchCameraLoop();
     }
 
@@ -177,6 +178,8 @@ public class GameManager : MonoBehaviour
         
         if (_win)
         {
+
+            
             levelSettings.AddEndedLoop();
             playerRec.isRecording = false;
             playerRec.RecordRound();
@@ -184,9 +187,12 @@ public class GameManager : MonoBehaviour
             
             if (levelSettings.LevelHasEnded())
             {
+
                 soundManager.PlayLevelCompleted();
                 playerMov.gameObject.SetActive(false);
-                levelCamera.EndLevelAnimationCamera();
+                //levelCamera.EndLevelAnimationCamera();
+                levelCamera.GlitchCameraLoop();
+
                 levelGUI.GameSuccessUI();
             }
             else

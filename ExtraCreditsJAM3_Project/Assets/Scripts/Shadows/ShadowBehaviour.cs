@@ -155,7 +155,6 @@ public class ShadowBehaviour : MonoBehaviour
 
         if ((actualTime - startMovingTime) >= (actualInQeueAction.instant - windUpTime)  && !windingUp )
         {
-            print("WINDUP");
             windingUp = true;
             shadowAnimator.SetTrigger("WindUp");
         }
