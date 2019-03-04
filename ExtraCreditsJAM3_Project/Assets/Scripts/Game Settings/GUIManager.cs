@@ -6,6 +6,7 @@ public class GUIManager : MonoBehaviour
  
 
     [SerializeField] private Transform gameOverPanel;
+    [SerializeField] private Transform winPanel;
     [SerializeField] private Transform gameplayPanel;
 
     [SerializeField] private Text loopsCountText;
@@ -50,11 +51,17 @@ public class GUIManager : MonoBehaviour
 
     public void GameSuccessUI()
     {
+        winPanel.gameObject.SetActive(true);
         gameplayPanel.gameObject.SetActive(false);
     }
 
     public void UpdateLoopText(int actualLoops, int totalLoops)
     {
         loopsCountText.text = actualLoops + " < " + totalLoops;
+    }
+
+    public void NextLevelUI()
+    {
+        GameManager.instance.ChangeToNextLevel();
     }
 }

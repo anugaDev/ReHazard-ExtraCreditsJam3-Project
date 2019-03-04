@@ -9,6 +9,8 @@ public class CameraActions : MonoBehaviour
     [SerializeField] private AnalogGlitch cameraGlitch;
 
     [SerializeField] private AnimationClip loopTransitionAnimation;
+    [SerializeField] private AnimationClip levelEndAnimation;
+
     [SerializeField] private Animation cameraAnimation;
 
     [HideInInspector] public bool playing;
@@ -40,5 +42,12 @@ public class CameraActions : MonoBehaviour
 //
 //        playing = false;
 
+    }
+
+    public void EndLevelAnimationCamera()
+    {
+        cameraAnimation.clip = levelEndAnimation;
+
+        cameraAnimation.Play();
     }
 }

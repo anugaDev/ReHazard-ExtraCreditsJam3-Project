@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public GUIManager levelGUI;
 
-    public bool onRound, failed;
+    public bool onRound, failed, first;
     
     // Start is called before the first frame update
     void Awake()
@@ -49,13 +50,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        print("start");
         StartCoroutine(LateStart());
     }
  
     IEnumerator LateStart()
     {
         yield return null;
-        
+        first = false;
         StartRound();
         //Your Function You Want to Call
     }
@@ -162,6 +164,8 @@ public class GameManager : MonoBehaviour
             
             if (levelSettings.LevelHasEnded())
             {
+                playerMov.gameObject.SetActive(false);
+                levelCamera.EndLevelAnimationCamera();
                 levelGUI.GameSuccessUI();
             }
             else
@@ -171,6 +175,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            levelCamera.EndLevelAnimationCamera();
+
             failed = true;
 
             playerMov.gameObject.SetActive(false);
@@ -205,6 +211,25 @@ public class GameManager : MonoBehaviour
       
         actualLevelEnemies.RemoveAt(actualLevelEnemies.IndexOf(enemy));
         enemy.KillEnemy();
+    }
+
+    public void ChangeToNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        roundPlayerRecords = new List<RoundRecordContainer>();
+        
+        StartCoroutine(LateStart());
+    }
+
+    public void ChangeToSpecifiedLevel(int levelIndex)
+    {
+        SceneManager.LoadScene(levelIndex);
+
+        roundPlayerRecords = new List<RoundRecordContainer>();
+        
+        
+        StartCoroutine(LateStart());
     }
 
 
