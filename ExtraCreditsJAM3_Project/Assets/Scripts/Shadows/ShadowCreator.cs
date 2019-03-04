@@ -51,6 +51,7 @@ public class ShadowCreator : MonoBehaviour
     {
         foreach (var shadow in levelShadows)
         {
+            if (shadow.affordanceInstance != null) DestroyImmediate(shadow.affordanceInstance.gameObject);
             Destroy(shadow.gameObject);
         }
         levelShadows.Clear();

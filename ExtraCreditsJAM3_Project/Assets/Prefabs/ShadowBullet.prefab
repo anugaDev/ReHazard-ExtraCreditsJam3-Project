@@ -145,6 +145,8 @@ MonoBehaviour:
   bulletSpeed: 0
   direction: {x: 0, y: 0}
   bulletRb: {fileID: 0}
+  bulletDestroyParticle: {fileID: 2699405861078222809, guid: 3112c3a42ea8f374c81a2a313e202524,
+    type: 3}
 --- !u!95 &5250870800035558759
 Animator:
   serializedVersion: 3

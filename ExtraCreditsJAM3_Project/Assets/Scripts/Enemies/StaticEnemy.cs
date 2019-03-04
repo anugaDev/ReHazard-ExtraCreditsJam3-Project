@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class StaticEnemy : Enemy
 {
-    
+    private Animator targetAnimator;
     public float rotationSpeed;
     // Start is called before the first frame update
     void Start()
     {
-        
+        targetAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -17,14 +17,16 @@ public class StaticEnemy : Enemy
     {
         transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
     }
-    public virtual void KillEnemy()
+    public override void KillEnemy()
     {
-        this.enabled = false;
+        
+        targetAnimator.SetTrigger("dead");
 
     }
 
     public virtual void SpawnEnemy()
     {
-        this.enabled = true;
+        gameObject.SetActive(true);
+        targetAnimator.SetTrigger("alive");
     }
 }

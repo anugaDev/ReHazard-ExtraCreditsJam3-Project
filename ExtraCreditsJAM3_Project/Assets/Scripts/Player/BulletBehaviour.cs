@@ -11,7 +11,7 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private Rigidbody2D bulletRb;
     private bool isHit = false;
 
-    
+    [SerializeField] private Transform bulletDestroyParticle;
     
     // Start is called before the first frame update
     void Start()
@@ -124,6 +124,7 @@ public class BulletBehaviour : MonoBehaviour
     }
     public void DestroyBullet()
     {
+        Instantiate(bulletDestroyParticle, transform.position, Quaternion.identity);
         var index = GameManager.instance.gameBullets.IndexOf(this);
 
 //        print(index);

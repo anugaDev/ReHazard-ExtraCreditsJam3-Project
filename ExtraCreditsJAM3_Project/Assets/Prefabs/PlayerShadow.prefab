@@ -273,3 +273,5 @@ MonoBehaviour:
   timeBetweenChangingPositions: 0
   windUpTime: 0.14
   legs: {fileID: 1892241137}
+  resetAffordance: {fileID: 1297541433676991453, guid: a4a7095b1b145114db5034ca39a87474,
+    type: 3}

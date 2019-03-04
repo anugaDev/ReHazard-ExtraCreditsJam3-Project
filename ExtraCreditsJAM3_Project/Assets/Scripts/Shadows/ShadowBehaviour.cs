@@ -29,6 +29,8 @@ public class ShadowBehaviour : MonoBehaviour
     private ShootingRecord actualInQeueAction;
 
 
+    [SerializeField] private Transform resetAffordance;
+    [HideInInspector] public Transform affordanceInstance;
     private Animator shadowAnimator;
     
     private Rigidbody2D shadowRb;
@@ -227,6 +229,8 @@ public class ShadowBehaviour : MonoBehaviour
         else allActionsMade = true;
 
         shadowRb.velocity = Vector3.zero;
+
+        affordanceInstance = Instantiate(resetAffordance, actualPositionTarget.position, Quaternion.identity);
         
         shadowAnimator.ResetTrigger("StartLoop");
         shadowAnimator.SetTrigger("EndLoop");
@@ -249,6 +253,8 @@ public class ShadowBehaviour : MonoBehaviour
         
         transform.position = actualPositionTarget.position;
 
+        if(affordanceInstance != null) DestroyImmediate((affordanceInstance.gameObject));
+        
         windingUp = false;
         
         timeForPosChange = 0;
