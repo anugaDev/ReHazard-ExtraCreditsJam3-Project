@@ -54,7 +54,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         print("start");
-        StartCoroutine(LateStart());
+        //StartCoroutine(LateStart());
+        StartCoroutine(FirstStart());
+    }
+
+    IEnumerator FirstStart()
+    {
+        yield return null;
+        
+        soundManager.LoopEffect();
+        levelCamera.GlitchCameraLoop();
+
     }
  
     IEnumerator LateStart()
