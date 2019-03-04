@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: 0a3ac3d10583e7542aba24b864139043
+guid: 9abfe871d35b3cf4f8d9e6044f5a84c0
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ShadowDeath_Anim_0
-    21300002: ShadowDeath_Anim_1
-    21300004: ShadowDeath_Anim_2
-    21300006: ShadowDeath_Anim_3
-    21300008: ShadowDeath_Anim_4
-    21300010: ShadowDeath_Anim_5
+    21300000: ShadowShootV2_Anim_0
+    21300002: ShadowShootV2_Anim_1
+    21300004: ShadowShootV2_Anim_2
+    21300006: ShadowShootV2_Anim_3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -134,121 +132,81 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ShadowDeath_Anim_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 48
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b3d10fb02314e2a45b69b9e628491583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ShadowDeath_Anim_1
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 32
-        width: 48
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45fec51042c07174f913894f7a05778e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ShadowDeath_Anim_2
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 32
-        width: 48
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ccd81eaf3ac78b49a47e648bf429e47
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ShadowDeath_Anim_3
+      name: ShadowShootV2_Anim_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 48
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.35416666, y: 0.46875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd3d1cbb2bf63ea4192219c8c5560544
+      spriteID: 3a958c6f285db634ba550cf6a6316955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShadowDeath_Anim_4
+      name: ShadowShootV2_Anim_1
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 48
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.35416666, y: 0.46875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7e010c9e8860e44b9a7175a516ca5e0
+      spriteID: 0b98edabc41deb04ea1d9d2b819bdbe9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShadowDeath_Anim_5
+      name: ShadowShootV2_Anim_2
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 48
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.35416666, y: 0.46875}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35a5ca4911c88ee49820d5108bf5450d
+      spriteID: 583c38b2450e8cb43919ffc43ce3ffef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShadowShootV2_Anim_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 32
+      alignment: 9
+      pivot: {x: 0.35416666, y: 0.46875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02ef54a5687409c49a8b1f645fa5ecef
       vertices: []
       indices: 
       edges: []
@@ -256,7 +214,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f4f003065d03e9943b5eb37389e87593
+    spriteID: d428a22a5b2c2ff4bb79c853c75a3857
     vertices: []
     indices: 
     edges: []
