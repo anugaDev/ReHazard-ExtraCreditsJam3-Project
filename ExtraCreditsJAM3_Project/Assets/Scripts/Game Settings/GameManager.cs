@@ -6,44 +6,34 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private float timeBetweenTransitions;
-    public static GameManager instance;
+    public static GameManager Instance;
 
-    [HideInInspector] public float roundStartTime;
-
-    [HideInInspector] public
-        PlayerMovement playerMov;
-
-    [HideInInspector] public
-        PlayerRecorder playerRec;
-
-    private List<RoundRecordContainer> roundPlayerRecords = new List<RoundRecordContainer>();
-
-    public ShadowCreator levelShadowcreator;
-
+    public ShadowCreator levelShadowCreator;
     public List<BulletBehaviour> gameBullets = new List<BulletBehaviour>();
     public List<Enemy> actualLevelEnemies = new List<Enemy>();
-
     public CameraActions levelCamera;
-
     public LevelSettings levelSettings;
-
     public GUIManager levelGUI;
     public SoundStateManager soundManager;
 
-    public bool onRound, failed, first ,loading;
-    [HideInInspector]public List<Transform> effectsToDestroy = new List<Transform>();
+    [SerializeField] private float timeBetweenTransitions;
+
+    [HideInInspector] public float roundStartTime;
+    [HideInInspector] public PlayerMovement playerMov;
+    [HideInInspector] public PlayerRecorder playerRec;
+    [HideInInspector] public List<Transform> effectsToDestroy = new List<Transform>();
+
+    private List<RoundRecordContainer> roundPlayerRecords = new List<RoundRecordContainer>();
+
+    public bool onRound, failed,loading;
     
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             
             DontDestroyOnLoad(this.gameObject);
-            
-
         }
         else
         {
@@ -51,32 +41,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        print("start");
-        //StartCoroutine(LateStart());
         StartCoroutine(FirstStart());
     }
-
-    IEnumerator FirstStart()
+    private IEnumerator FirstStart()
     {
         yield return null;
         
         soundManager.LoopEffect();
         levelCamera.GlitchCameraLoop();
-
     }
- 
-    IEnumerator LateStart()
+    private IEnumerator LateStart()
     {
         yield return null;
-        first = false;
         StartRound();
-        //Your Function You Want to Call
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(onRound)
          CheckForFinish();
@@ -88,18 +69,12 @@ public class GameManager : MonoBehaviour
            
         }
     }
-
     public void StartRound()
     {
-        
-
-        
         failed = false;
         onRound = true;
         
         actualLevelEnemies = levelSettings.ListToManager();
-        
-
         foreach (var enemy in actualLevelEnemies)
         {
             enemy.gameObject.SetActive(true);
@@ -110,8 +85,8 @@ public class GameManager : MonoBehaviour
 
         levelSettings.actualLevelTime = 0;
         
-        levelShadowcreator.SetPlayerRecords(roundPlayerRecords);
-        levelShadowcreator.CreateShadows();
+        levelShadowCreator.SetPlayerRecords(roundPlayerRecords);
+        levelShadowCreator.CreateShadows();
         playerMov.ResetToSpawn(levelSettings.GetPlayerRandomSpawnPosition(levelSettings.actualLoops));
         playerRec.ResetRecord();
         
@@ -124,13 +99,12 @@ public class GameManager : MonoBehaviour
 
     public void StoreRecordRound(List<MovementRecord> _movements, List<ShootingRecord> _shootings)
     {
-        
         roundPlayerRecords.Add(new RoundRecordContainer(_movements,_shootings));
     }
 
     private void CheckForFinish()
     {
-        if (levelShadowcreator.levelShadows.Count <= 0 &&  actualLevelEnemies.Count <= 0 && !loading)
+        if (levelShadowCreator.levelShadows.Count <= 0 &&  actualLevelEnemies.Count <= 0 && !loading)
         {
             StartCoroutine(ExecuteLateFinish(true));
         }
@@ -141,16 +115,12 @@ public class GameManager : MonoBehaviour
         else
         {
             levelSettings.actualLevelTime += Time.deltaTime;
-            
             levelGUI.UpdateTimeGUI(levelSettings.actualLevelTime,levelSettings.levelTime);
-            
-            levelGUI.UpdateLoopText(levelSettings.actualLoops,levelSettings.loopTimes);
-            
+            levelGUI.UpdateLoopText(levelSettings.actualLoops,levelSettings.loopTimes);            
         }
-        
     }
 
-    IEnumerator ExecuteLateFinish(bool condition)
+    private IEnumerator ExecuteLateFinish(bool condition)
     {
         loading = true;
         yield return new WaitForSeconds(timeBetweenTransitions);
@@ -159,37 +129,28 @@ public class GameManager : MonoBehaviour
             
     }
 
-    public void FinishRound(bool _win)
+    public void FinishRound(bool win)
     {
         onRound = false;
-        
-        levelShadowcreator.ResetShadows();
+        levelShadowCreator.ResetShadows();
 
         foreach (var effect in effectsToDestroy)
         {
-        if(effect != null) Destroy(effect.gameObject);
-            
+            if(effect != null) Destroy(effect.gameObject);
         }
         
         foreach (var enemy in levelSettings.ListToManager())
         {
             enemy.gameObject.SetActive(false);
-         
         }
         
         foreach (var bullet in gameBullets)
         {
             Destroy(bullet.gameObject);
-                
         }
         gameBullets = new List<BulletBehaviour>();
-
-        
-        
-        if (_win)
+        if (win)
         {
-
-            
             levelSettings.AddEndedLoop();
             playerRec.isRecording = false;
             playerRec.RecordRound();
@@ -200,7 +161,6 @@ public class GameManager : MonoBehaviour
 
                 soundManager.PlayLevelCompleted();
                 playerMov.gameObject.SetActive(false);
-                //levelCamera.EndLevelAnimationCamera();
                 levelCamera.GlitchCameraLoop();
 
                 levelGUI.GameSuccessUI();
@@ -213,46 +173,31 @@ public class GameManager : MonoBehaviour
         else
         {
             soundManager.PlayDeath();
-            
             levelCamera.EndLevelAnimationCamera();
+            playerMov.PlayerDeath();
+            levelSettings.ResetLoops();
+            levelGUI.GameOverUI();
 
             failed = true;
-
-            playerMov.PlayerDeath();
-            
-            levelSettings.ResetLoops();
-            
             playerRec.isRecording = false;
-            
             roundPlayerRecords = new List<RoundRecordContainer>();
             
-            levelGUI.GameOverUI();
-           
         }
-
-       
-
-        
-        
-        //StartRound();
     }
-
-    public void RemoveShadowAt(ShadowBehaviour _shadow)
+    public void RemoveShadowAt(ShadowBehaviour shadow)
     {
         if (!onRound) return;
-        levelShadowcreator.levelShadows.RemoveAt((levelShadowcreator.levelShadows.IndexOf(_shadow)));
-        _shadow.DestroyShadow();
-        Destroy(_shadow.gameObject);
+        levelShadowCreator.levelShadows.RemoveAt((levelShadowCreator.levelShadows.IndexOf(shadow)));
+        shadow.DestroyShadow();
+        Destroy(shadow.gameObject);
 
     }
-
     public void KillEnemy(Enemy enemy)
     {
       
         actualLevelEnemies.RemoveAt(actualLevelEnemies.IndexOf(enemy));
         enemy.KillEnemy();
     }
-
     public void ChangeToNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -261,22 +206,16 @@ public class GameManager : MonoBehaviour
         
         StartCoroutine(LateStart());
     }
-
     public void ChangeToSpecifiedLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
 
         roundPlayerRecords = new List<RoundRecordContainer>();
         
-        
         StartCoroutine(LateStart());
     }
-
-    public void QuitGame()
+    public static void QuitGame()
     {
         Application.Quit();
     }
-
-
-    
 }

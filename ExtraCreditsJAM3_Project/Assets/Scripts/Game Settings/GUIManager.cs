@@ -1,81 +1,63 @@
 ﻿using System.Collections;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour
 {
-
-
     [SerializeField] private float timeOnBlack;
     [SerializeField] private Transform blackPanel;
     [SerializeField] private Transform gameOverPanel;
     [SerializeField] private Transform winPanel;
-    [SerializeField] private Transform gameplayPanel;
+    [SerializeField] private Transform inGamePanel;
 
     [SerializeField] private Text loopsCountText;
     [SerializeField] private Text timerUI;
 
-
     private bool alreadyPlaying;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        GameManager.instance.levelGUI = this;
+        GameManager.Instance.levelGUI = this;
     }
-
-    // Update is called once per frame
-
-
-    public void UpdateTimeGUI(float _time, float _totalTime)
+    public void UpdateTimeGUI(float time, float totalTime)
     {
-        var timeToUI = _totalTime - _time;
-        
-
+        var timeToUI = totalTime - time;
         timeToUI = Mathf.RoundToInt(timeToUI);
         
-        timerUI.text = timeToUI.ToString();
-        
-        
+        timerUI.text = timeToUI.ToString(CultureInfo.InvariantCulture);
     }
-
     public void StartGameplayUI()
     {
         alreadyPlaying = true;
         blackPanel.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
-        gameplayPanel.gameObject.SetActive(true);
+        inGamePanel.gameObject.SetActive(true);
         
-        GameManager.instance.StartRound();
-
+        GameManager.Instance.StartRound();
     }
-
     public void GameOverUI()
     {
-
         alreadyPlaying = false;
         
-        gameplayPanel.gameObject.SetActive(false);
+        inGamePanel.gameObject.SetActive(false);
 
         StartCoroutine(WaitOnBlack(timeOnBlack));
     }
-
     public void GameSuccessUI()
     {
         winPanel.gameObject.SetActive(true);
-        gameplayPanel.gameObject.SetActive(false);
+        inGamePanel.gameObject.SetActive(false);
     }
-
     public void UpdateLoopText(int actualLoops, int totalLoops)
     {
         loopsCountText.text = actualLoops + " < " + totalLoops;
     }
-
     public void NextLevelUI()
     {
-        GameManager.instance.ChangeToNextLevel();
+        GameManager.Instance.ChangeToNextLevel();
     }
-
-    IEnumerator WaitOnBlack(float _time)
+    private IEnumerator WaitOnBlack(float _time)
     {
         blackPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(_time);
@@ -89,6 +71,6 @@ public class GUIManager : MonoBehaviour
 
     public void QuitGUI()
     {
-        GameManager.instance.QuitGame();
+        GameManager.QuitGame();
     }
 }

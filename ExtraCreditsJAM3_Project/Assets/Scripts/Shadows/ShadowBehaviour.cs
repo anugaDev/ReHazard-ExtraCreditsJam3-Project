@@ -4,88 +4,73 @@ using UnityEngine;
 
 public class ShadowBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private Transform bulletPrefab;
-    [SerializeField] private float 
-        shadowSpeed,
-        shadowRotSpeed,
-        inPositionRadius,
-        startMovingTime,
-        startingWaitTime,
-        loopPauseTime,
-        bulletSpeed,
-        bulletOffset,
-        timeBetweenChangingPositions,
-        windUpTime
-        ;
-
-    private float timeForPosChange = 0;
-
+    [SerializeField] private float shadowSpeed;
+    [SerializeField] private float shadowRotSpeed;
+    [SerializeField] private float inPositionRadius;
+    [SerializeField] private float startMovingTime;
+    [SerializeField] private float startingWaitTime;
+    [SerializeField] private float loopPauseTime;
+    [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletOffset;
+    [SerializeField] private float timeBetweenChangingPositions;
+    [SerializeField] private float windUpTime;
+    
+    [SerializeField] private Transform bulletPrefab;
+    [SerializeField] private AudioClip shadowShootClip;
     [SerializeField] private Transform legs;
-
+    [SerializeField] private Transform resetAffordance, deathShadowParticle;
+    
     [HideInInspector] public RoundRecordContainer shadowActionsRecord;
+    [HideInInspector] public Transform affordanceInstance;
 
+    private float timeForPosChange;
     private MovementRecord actualPositionTarget;
     private ShootingRecord actualInQeueAction;
-
-
     private AudioSource shadowSource;
-    [SerializeField] private AudioClip shadowShootClip;
-        
-    [SerializeField] private Transform resetAffordance, deathShadowParticle;
-    [HideInInspector] public Transform affordanceInstance;
     private Animator shadowAnimator;
     
     private Rigidbody2D shadowRb;
-    private bool isMoving = false, allActionsMade, allPositionsMade, windingUp;
+    private bool isMoving, allActionsMade, allPositionsMade, windingUp;
     
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         shadowSource = GetComponent<AudioSource>();
         shadowAnimator = GetComponent<Animator>();
         shadowRb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (isMoving)
-        {
-            UpdateMovement();
-            UpdateRotation();
-            CheckForPosition();
-            CheckForShooting();
+        if (!isMoving) return;
+        UpdateMovement();
+        UpdateRotation();
+        CheckForPosition();
+        CheckForShooting();
 
-            if (allActionsMade && allPositionsMade)
-            {
-                ResetShadow();
-            }
+        if (allActionsMade && allPositionsMade)
+        {
+            ResetShadow();
         }
-        
+
     }
-    public void SetBehaviour(RoundRecordContainer _shadowActionsRecord)
+    public void SetBehaviour(RoundRecordContainer shadowActionsRecord)
     {
-       
+       this.shadowActionsRecord = shadowActionsRecord;
         
-        this.shadowActionsRecord = _shadowActionsRecord;
-        
-        actualPositionTarget = shadowActionsRecord.roundMovementRecords[0];
-        if (_shadowActionsRecord.roundShootingRecords.Count > 0)
-            actualInQeueAction = shadowActionsRecord.roundShootingRecords[0];
+        actualPositionTarget = this.shadowActionsRecord.roundMovementRecords[0];
+        if (shadowActionsRecord.roundShootingRecords.Count > 0)
+            actualInQeueAction = this.shadowActionsRecord.roundShootingRecords[0];
         else allActionsMade = true;
         
         startMovingTime = Time.time;
 
         transform.position = actualPositionTarget.position;
 
-        timeBetweenChangingPositions = GameManager.instance.playerRec.recordTime;
+        timeBetweenChangingPositions = GameManager.Instance.playerRec.recordTime;
 
         StartCoroutine(WaitTime(startingWaitTime));
 
         allPositionsMade = false;
-
-
     }
 
     private void UpdateMovement()
@@ -107,44 +92,30 @@ public class ShadowBehaviour : MonoBehaviour
             shadowRb.velocity = Vector3.zero;
             legs.gameObject.SetActive(false);
         }
-        
-        
-       
-        
     }
-
-
     private void UpdateRotation()
     {
-//        Debug.DrawRay(transform.position, actualPositionTarget.direction, Color.green);
         var angle = Mathf.Atan2(actualPositionTarget.direction.y, actualPositionTarget.direction.x) * Mathf.Rad2Deg;
         var q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.fixedDeltaTime * shadowRotSpeed);
-
-        
-       
-
     }
 
     private void CheckForPosition()
     {
-        if (!allPositionsMade)
+        if (allPositionsMade) return;
+        timeForPosChange += Time.deltaTime;
+        if (!(timeForPosChange >= timeBetweenChangingPositions)) return;
+        if (actualPositionTarget ==
+            shadowActionsRecord.roundMovementRecords[shadowActionsRecord.roundMovementRecords.Count - 1])
         {
-            
-            timeForPosChange += Time.deltaTime;
-            if (!(timeForPosChange >= timeBetweenChangingPositions)) return;
-            if (actualPositionTarget ==
-                shadowActionsRecord.roundMovementRecords[shadowActionsRecord.roundMovementRecords.Count - 1])
-            {
-                allPositionsMade = true;
-            }
-            else
-            {
-                SetNextPosition();
-            }
-
-            timeForPosChange = 0;
+            allPositionsMade = true;
         }
+        else
+        {
+            SetNextPosition();
+        }
+
+        timeForPosChange = 0;
 
     }
     private void CheckForShooting()
@@ -158,22 +129,12 @@ public class ShadowBehaviour : MonoBehaviour
             windingUp = true;
             shadowAnimator.SetTrigger("WindUp");
         }
-       
-        if (!allActionsMade)
+
+        if (allActionsMade) return;
+        if ((actualTime - startMovingTime) >= actualInQeueAction.instant)
         {
-            if ((actualTime - startMovingTime) >= actualInQeueAction.instant)
-            {
-                ShadowShoot();
-                
-                
-                
-                
-
-            }
+            ShadowShoot();
         }
-       
-
-
     }
 
     private void SetNextPosition()
@@ -188,39 +149,29 @@ public class ShadowBehaviour : MonoBehaviour
             shadowActionsRecord.roundShootingRecords
                 [shadowActionsRecord.roundShootingRecords.IndexOf(actualInQeueAction) + 1];
     }
-
-    
-
     private void ShadowShoot()
     {
         shadowSource.clip = shadowShootClip;
         shadowSource.Play();
-         shadowAnimator.SetTrigger("Shoot");
-         windingUp = false;
+        shadowAnimator.SetTrigger("Shoot");
+        windingUp = false;
+        
         var rotationZ = Mathf.Atan2(actualInQeueAction.shootingDir.y, actualInQeueAction.shootingDir.x) * Mathf.Rad2Deg;
         Vector3 direction = actualInQeueAction.shootingDir;
+        
         var bullet = Instantiate(bulletPrefab, transform.position + (direction * bulletOffset) , Quaternion.Euler(0.0f, 0.0f, rotationZ)).GetComponent<BulletBehaviour>();
         bullet.SetBullet(bulletSpeed,actualInQeueAction.shootingDir,bullet.GetComponent<Rigidbody2D>());
         
         if (actualInQeueAction ==
             shadowActionsRecord.roundShootingRecords[shadowActionsRecord.roundShootingRecords.Count - 1])
         {
-            
             allActionsMade = true;
         }
         else
         {
-           
             SetNextAction();
         }
     }
-
-   
-
-    
-
-
-
     private void ResetShadow()
     {
         
@@ -237,7 +188,7 @@ public class ShadowBehaviour : MonoBehaviour
 
         affordanceInstance = Instantiate(resetAffordance, actualPositionTarget.position, Quaternion.identity);
         
-        GameManager.instance.effectsToDestroy.Add(affordanceInstance);
+        GameManager.Instance.effectsToDestroy.Add(affordanceInstance);
         
         shadowAnimator.ResetTrigger("StartLoop");
         shadowAnimator.SetTrigger("EndLoop");
@@ -246,13 +197,12 @@ public class ShadowBehaviour : MonoBehaviour
         allPositionsMade = false;
 
     }
-
-    IEnumerator WaitTime(float _waitTime)
+    private IEnumerator WaitTime(float waitTime)
     {
         legs.gameObject.SetActive(false);
 
         isMoving = false;
-        yield return new WaitForSeconds(_waitTime);
+        yield return new WaitForSeconds(waitTime);
         
         shadowAnimator.SetTrigger("StartLoop");
         isMoving = true;
@@ -266,10 +216,9 @@ public class ShadowBehaviour : MonoBehaviour
         
         timeForPosChange = 0;
     }
-
     public void DestroyShadow()
     {
         if(affordanceInstance!= null) Destroy(affordanceInstance.gameObject);
-        GameManager.instance.effectsToDestroy.Add(Instantiate(deathShadowParticle, transform.position, transform.rotation)); ;
+        GameManager.Instance.effectsToDestroy.Add(Instantiate(deathShadowParticle, transform.position, transform.rotation)); ;
     }
 }

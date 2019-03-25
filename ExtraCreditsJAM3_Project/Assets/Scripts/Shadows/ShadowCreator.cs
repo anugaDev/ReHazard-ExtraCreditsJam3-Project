@@ -5,23 +5,14 @@ using UnityEngine;
 public class ShadowCreator : MonoBehaviour
 {
     public List<ShadowBehaviour> levelShadows = new List<ShadowBehaviour>();
-
     public List<RoundRecordContainer> playerRecords = new List<RoundRecordContainer>();
 
-
     [SerializeField] private GameObject shadowPrefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameManager.instance.levelShadowcreator = this;
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        GameManager.Instance.levelShadowCreator = this;
     }
-
     public void CreateShadows()
     {
         foreach (var record in playerRecords)
@@ -37,16 +28,14 @@ public class ShadowCreator : MonoBehaviour
         }
     }
 
-    public void SetPlayerRecords(List<RoundRecordContainer> _records)
+    public void SetPlayerRecords(List<RoundRecordContainer> records)
     {
-        playerRecords = _records;
+        playerRecords = records;
     }
-
     public void ErasePlayerRecords()
     {
         playerRecords = new List<RoundRecordContainer>();
     }
-
     public void ResetShadows()
     {
         foreach (var shadow in levelShadows)

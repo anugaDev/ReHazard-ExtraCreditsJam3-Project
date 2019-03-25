@@ -5,19 +5,15 @@ using UnityEngine;
 public class PlayerRecorder : MonoBehaviour
 {
     public bool isRecording;
-    [SerializeField] public float recordTime;
-
     public List<MovementRecord> playerMovementRecords = new List<MovementRecord>();
     public List<ShootingRecord> playerShootingRecords = new List<ShootingRecord>();
-
+    
+    [SerializeField] public float recordTime;
     private IEnumerator recorderStored;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-
         BeginRound();
-        GameManager.instance.playerRec = this;
+        GameManager.Instance.playerRec = this;
     }
 
 
@@ -28,7 +24,8 @@ public class PlayerRecorder : MonoBehaviour
         recorderStored = RecordGameplay();
         StartCoroutine(recorderStored);
     }
-    public void AddMovementRecord()
+
+    private void AddMovementRecord()
     {
         playerMovementRecords.Add(new MovementRecord(transform.position, transform.right));
         
@@ -36,28 +33,24 @@ public class PlayerRecorder : MonoBehaviour
 
     public void AddShootingRecord()
     {
-        var shootTime = Time.time - GameManager.instance.roundStartTime;
+        var shootTime = Time.time - GameManager.Instance.roundStartTime;
         playerShootingRecords.Add(new ShootingRecord(shootTime, transform.right));
     }
 
-    IEnumerator RecordGameplay()
+    private IEnumerator RecordGameplay()
     {
         while (isRecording)
         {
             AddMovementRecord();
             yield return new WaitForSeconds(recordTime);
         }
-        
-        
     }
 
     public void RecordRound()
     {
-        
-        GameManager.instance.StoreRecordRound(playerMovementRecords,playerShootingRecords);
+        GameManager.Instance.StoreRecordRound(playerMovementRecords,playerShootingRecords);
         
     }
-
     public void ResetRecord()
     {
         isRecording = false;

@@ -7,15 +7,12 @@ public class StaticEnemy : Enemy
     private AudioSource targetSouce;
     private Animator targetAnimator;
     public float rotationSpeed;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         targetSouce = GetComponent<AudioSource>();
         targetAnimator = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
     }
@@ -23,12 +20,12 @@ public class StaticEnemy : Enemy
     {
         targetSouce.Play();
         targetAnimator.SetTrigger("dead");
-
     }
-
-    public virtual void SpawnEnemy()
+    public override void SpawnEnemy(Vector3 spawnPos)
     {
         gameObject.SetActive(true);
         targetAnimator.SetTrigger("alive");
+        
+        base.SpawnEnemy(spawnPos);
     }
 }

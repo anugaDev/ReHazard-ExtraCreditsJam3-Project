@@ -3,35 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
-{// Start is called before the first frame update
-
+{
     public bool isAlive;
-    
-    void Start()
+    // Start is called before the first frame update
+    private void Start()
     {
         isAlive = true;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public virtual void KillEnemy()
     {
-        
-        if (isAlive)
+        if (!isAlive)
         {
-            //this.enabled = false;
             isAlive = false;
         }
+   
     }
-
-    public virtual void SpawnEnemy(Vector3 newPos)
+    public virtual void SpawnEnemy(Vector3 spawnPos)
     {
-        transform.position = newPos;
+        transform.position = spawnPos;
         isAlive = true;
-        // this.enabled = true;
+
     }
 }

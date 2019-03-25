@@ -55,7 +55,6 @@
           <e p="DestroySelfAnimation.cs" t="Include" />
           <e p="Enemies" t="Include">
             <e p="Enemy.cs" t="Include" />
-            <e p="EnemyBlackboard.cs" t="Include" />
             <e p="StaticEnemy.cs" t="Include" />
           </e>
           <e p="Game Settings" t="Include">

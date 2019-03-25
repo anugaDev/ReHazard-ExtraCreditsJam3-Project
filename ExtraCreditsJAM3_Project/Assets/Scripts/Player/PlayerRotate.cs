@@ -1,28 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour
 {
     [SerializeField] private Camera gameCamera;
     public Vector2 lookingVector;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         gameCamera = gameCamera == null ? Camera.main : gameCamera;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         UpdateMouse();
     }
-    void UpdateMouse()
+    private void UpdateMouse()
     {
-        Vector3 mousePos = Input.mousePosition;
+        var mousePos = Input.mousePosition;
         mousePos.z = -gameCamera.transform.position.z;
-        Vector3 l_objectPos = gameCamera.WorldToScreenPoint(transform.position);
+        var l_objectPos = gameCamera.WorldToScreenPoint(transform.position);
 
         mousePos.x -= l_objectPos.x;
         mousePos.y -= l_objectPos.y;
@@ -35,9 +30,6 @@ public class PlayerRotate : MonoBehaviour
         }
         lookingVector =  mousePos;
         lookingVector.Normalize();
-
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, angle );
-
-
     }
 }

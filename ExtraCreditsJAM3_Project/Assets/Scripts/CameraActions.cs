@@ -5,43 +5,22 @@ using UnityEngine;
 
 public class CameraActions : MonoBehaviour
 {
-    
     [SerializeField] private AnalogGlitch cameraGlitch;
-
     [SerializeField] private AnimationClip loopTransitionAnimation;
     [SerializeField] private AnimationClip levelEndAnimation;
-
     [SerializeField] private Animation cameraAnimation;
 
     [HideInInspector] public bool playing;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        GameManager.instance.levelCamera = this;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.Instance.levelCamera = this;
     }
 
     public void GlitchCameraLoop()
     {
         cameraAnimation.clip = loopTransitionAnimation;
-
         cameraAnimation.Play();
-
-//        playing = true;
-//
-//        while (cameraAnimation.isPlaying)
-//        {
-//            yield return null;
-//        }
-//
-//        playing = false;
-
     }
 
     public void EndLevelAnimationCamera()

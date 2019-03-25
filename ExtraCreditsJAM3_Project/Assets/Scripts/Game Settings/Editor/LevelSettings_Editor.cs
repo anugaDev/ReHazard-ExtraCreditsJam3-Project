@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEditor;
 
@@ -7,8 +6,7 @@ using UnityEditor;
 
 public class LevelSettings_Editor : Editor
 {
-   
-    void OnEnable()
+    private void OnEnable()
     {
         LevelSettings listScript;
         listScript = (LevelSettings)target;
@@ -19,7 +17,7 @@ public class LevelSettings_Editor : Editor
         DrawDefaultInspector();
         base.OnInspectorGUI();
 
-        LevelSettings listScript = target as LevelSettings;
+        var listScript = target as LevelSettings;
 
         if (GUILayout.Button("Fetch Enemies"))
         {

@@ -1,63 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private KeyCode
-        upKey = KeyCode.W,
-        downKey = KeyCode.S,
-        leftKey = KeyCode.A,
-        rightKey = KeyCode.D
-        
-        ;
+    [HideInInspector] public float actualSpeed;
 
+    [SerializeField] private KeyCode upKey = KeyCode.W;
+    [SerializeField] private KeyCode downKey = KeyCode.S  ;
+    [SerializeField] private KeyCode leftKey = KeyCode.A;
+    [SerializeField] private KeyCode rightKey = KeyCode.D;
     [SerializeField] private Rigidbody2D playerRb;
-
-  
+    [SerializeField] private Transform legs;
+    [SerializeField] private Transform playerDeath;
+    [SerializeField] private float legsRotSpeed;
+    [SerializeField] private float defaultSpeed;
     
-    [SerializeField] private Transform 
-        legs,
-        playerDeath,
-        playerSuccess
-        ;
-
-    [SerializeField] private float
-        defaultSpeed,
-        legsRotSpeed
-        ;
-    
-    [HideInInspector] public float 
-        actualSpeed
-        ;
-
-    [SerializeField] private AudioClip deathClip;
-
     private Vector2 direction;
     private GameObject myDeath;
-        
-    void Start()
+
+    private void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         actualSpeed = defaultSpeed;
-        GameManager.instance.playerMov = this;
-       
+        GameManager.Instance.playerMov = this;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-      
-        Updatedirection();
-
+        UpdateDirection();
         UpdateLegs();
     }
-    void Updatedirection()
+    private void UpdateDirection()
     {
         playerRb.angularVelocity = 0;
         playerRb.velocity = Vector3.zero;
-    
-
         var movement = Vector2.zero;
 
         if (Input.GetKey(upKey))
@@ -77,91 +52,33 @@ public class PlayerMovement : MonoBehaviour
         {
             movement.x -= 1;
         }
-
-
-
+        
         direction = movement;
-      
-
         movement *= actualSpeed * Time.fixedDeltaTime;
-
-
-
-
         playerRb.velocity = movement;
     }
-
     public void ResetToSpawn(Vector3 newPosition)
     {
         playerRb.velocity = Vector3.zero;
         transform.position = newPosition;
     }
-
     public void Respawn()
     {
         gameObject.SetActive(true);
         if(myDeath != null) Destroy(myDeath);
     }
-
     public void PlayerDeath()
     {
-        
         gameObject.SetActive(false);
-     
-        
         myDeath = Instantiate(playerDeath.gameObject, transform.position, transform.rotation);
-        GameManager.instance.effectsToDestroy.Add(myDeath.transform); 
+        GameManager.Instance.effectsToDestroy.Add(myDeath.transform); 
     }
-
-
-    void UpdateLegs()
+    private void UpdateLegs()
     {
-        
-        if (direction != Vector2.zero)
-        {
-            legs.gameObject.SetActive(true);
-        }
-        else
-        {
-            legs.gameObject.SetActive(false);
-        }
+        legs.gameObject.SetActive(direction != Vector2.zero);
         var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         var q = Quaternion.AngleAxis(angle, Vector3.forward);
         legs.transform.rotation = Quaternion.Slerp(legs.transform.rotation, q, Time.fixedDeltaTime * legsRotSpeed );
     }
-
-    public void SetLegs(bool _state)
-    {
-        if (_state) //on
-        {
-            
-        }
-        else //off
-        {
-            
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        print("coliding");
-        Vector2 position = transform.position;
-        
-        var point= other.gameObject.GetComponent<Collider2D>().bounds.ClosestPoint(transform.position);
-
-        
-        Vector3 dir = point - transform.position ;
-        var magnitude = dir.magnitude;
-        // We then get the opposite (-Vector3) and normalize it
-        dir = -dir.normalized;
-//         And finally we add force in the direction of dir and multiply it by force. 
-//         This will push back the player
-        playerRb.AddForce(dir*magnitude);
-    }
-
-//    private void OnCollisionEnter2D(Collision2D other)
-//    {  print("coliding");
-//        Vector2 position = transform.position;
-//        
-//    }
+ 
 }
