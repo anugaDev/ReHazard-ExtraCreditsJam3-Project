@@ -95,6 +95,9 @@ public class GameManager : MonoBehaviour
 
         soundManager.LoopEffect();
         levelCamera.GlitchCameraLoop();
+        
+        soundManager.StartSecondLoop();
+
     }
 
     public void StoreRecordRound(List<MovementRecord> _movements, List<ShootingRecord> _shootings)
@@ -133,6 +136,9 @@ public class GameManager : MonoBehaviour
     {
         onRound = false;
         levelShadowCreator.ResetShadows();
+        
+        soundManager.StopSecondLoop();
+
 
         foreach (var effect in effectsToDestroy)
         {

@@ -47,22 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99acd77a9b28c04797071e82462cbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenTransitions: 0.25
-  roundStartTime: 0
-  playerMov: {fileID: 0}
-  playerRec: {fileID: 0}
-  levelShadowcreator: {fileID: 0}
+  levelShadowCreator: {fileID: 0}
   gameBullets: []
   actualLevelEnemies: []
   levelCamera: {fileID: 0}
   levelSettings: {fileID: 0}
   levelGUI: {fileID: 0}
   soundManager: {fileID: 0}
+  timeBetweenTransitions: 0.25
+  roundStartTime: 0
+  playerMov: {fileID: 0}
+  playerRec: {fileID: 0}
+  effectsToDestroy: []
   onRound: 0
   failed: 0
-  first: 0
   loading: 0
-  effectsToDestroy: []
 --- !u!114 &8611564777471175375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,8 +282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectPlayer: {fileID: 904900571}
-  ambiencePlayer: {fileID: 8611564777471175372}
   deathEffect: {fileID: 8300000, guid: 5b52513ac0a25b6419c00bfdd8555eae, type: 3}
   loopEffect: {fileID: 8300000, guid: 38ebb5ac6267e554d89c774990e772f5, type: 3}
   levelCompletedEffect: {fileID: 8300000, guid: 00d4f3c4a80e86f43816a78242b994ff,
     type: 3}
+  timePassingEffect: {fileID: 8300000, guid: 92d2a1591e2e8d843a3bfab90d3860d1, type: 3}

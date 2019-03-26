@@ -8,6 +8,12 @@ public class SoundStateManager : MonoBehaviour
     [SerializeField] private AudioClip deathEffect;
     [SerializeField] private AudioClip loopEffect;
     [SerializeField] private AudioClip levelCompletedEffect;
+    [SerializeField] private AudioClip timePassingEffect;
+
+    private IEnumerator secondCounter;
+    
+    
+    
 
     private void Start()
     {
@@ -27,5 +33,34 @@ public class SoundStateManager : MonoBehaviour
     {
         effectPlayer.clip = loopEffect;
         effectPlayer.Play();
+    }
+
+    public void StartSecondLoop()
+    {
+        secondCounter = CountSeconds();
+        StartCoroutine(secondCounter);
+    }
+
+    public void StopSecondLoop()
+    {
+        StopCoroutine(secondCounter);
+    }
+
+    private IEnumerator CountSeconds()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+
+            if (effectPlayer.clip != timePassingEffect)
+            {
+                if(effectPlayer.isPlaying) continue;
+
+                effectPlayer.clip = timePassingEffect;
+            }
+            effectPlayer.Play();
+        }
+
+
     }
 }
