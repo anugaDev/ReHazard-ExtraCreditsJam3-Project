@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GUIManager : MonoBehaviour
 {
     [SerializeField] private float timeOnBlack;
+    private float roundedSecond;
     [SerializeField] private Transform blackPanel;
     [SerializeField] private Transform gameOverPanel;
     [SerializeField] private Transform winPanel;
@@ -24,6 +25,13 @@ public class GUIManager : MonoBehaviour
     {
         var timeToUI = totalTime - time;
         timeToUI = Mathf.RoundToInt(timeToUI);
+        if (roundedSecond != timeToUI)
+        {
+            GameManager.Instance.soundManager.PlaySecond();
+
+            roundedSecond = timeToUI;
+        }
+        
         
         timerUI.text = timeToUI.ToString(CultureInfo.InvariantCulture);
     }

@@ -96,7 +96,6 @@ public class GameManager : MonoBehaviour
         soundManager.LoopEffect();
         levelCamera.GlitchCameraLoop();
         
-        soundManager.StartSecondLoop();
 
     }
 
@@ -137,7 +136,6 @@ public class GameManager : MonoBehaviour
         onRound = false;
         levelShadowCreator.ResetShadows();
         
-        soundManager.StopSecondLoop();
 
 
         foreach (var effect in effectsToDestroy)

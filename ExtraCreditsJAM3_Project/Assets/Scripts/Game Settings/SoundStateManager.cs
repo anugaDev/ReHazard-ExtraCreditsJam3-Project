@@ -5,12 +5,11 @@ using UnityEngine;
 public class SoundStateManager : MonoBehaviour
 {
     [SerializeField] private AudioSource effectPlayer;
+    [SerializeField] private AudioSource secondPlayer;
     [SerializeField] private AudioClip deathEffect;
     [SerializeField] private AudioClip loopEffect;
     [SerializeField] private AudioClip levelCompletedEffect;
-    [SerializeField] private AudioClip timePassingEffect;
 
-    private IEnumerator secondCounter;
     
     
     
@@ -35,32 +34,12 @@ public class SoundStateManager : MonoBehaviour
         effectPlayer.Play();
     }
 
-    public void StartSecondLoop()
+    public void PlaySecond()
     {
-        secondCounter = CountSeconds();
-        StartCoroutine(secondCounter);
+        secondPlayer.Play();
     }
 
-    public void StopSecondLoop()
-    {
-        StopCoroutine(secondCounter);
-    }
-
-    private IEnumerator CountSeconds()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1.0f);
-
-            if (effectPlayer.clip != timePassingEffect)
-            {
-                if(effectPlayer.isPlaying) continue;
-
-                effectPlayer.clip = timePassingEffect;
-            }
-            effectPlayer.Play();
-        }
+   
 
 
-    }
 }
